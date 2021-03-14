@@ -90,10 +90,10 @@ const addtocartproduct = () =>{
         else{
             localStorage.setItem("Cart" , JSON.stringify([data]) )
         }
-        setTimeout(()=>{
-            props.history.push("/card")
+        // setTimeout(()=>{
+            // props.history.push("/card")
         //   <Redirect to="/card" /> 
-        },1500)
+        // },1500)
     }
 
 }

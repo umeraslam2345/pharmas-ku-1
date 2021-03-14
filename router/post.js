@@ -3,6 +3,7 @@ const app = express();
 const AdmincreateProduct = require('../Schema/AdmincreateProduct')
 // const requireLogin = require('../middleWare/requireLogin')
 const CheckoutData = require('../Schema/collectdatafromCheckout')
+const AdminLogin = require('../Schema/adminSign')
 const ProductCatogories = require('../Schema/ProductCatogories')
 const nodemailer = require("nodemailer")
 
@@ -52,6 +53,27 @@ app.post("/SendEmailbyAdmin" ,(req, res) => {
 
             }
     else res.json({ Error : "Field Are Required"})
+})
+
+
+
+
+app.post("/logIn" ,(req, res) => {
+    console.log(req.body);
+    const { email , pass  } = req.body;
+    if(email , pass ){
+            
+        const AdminLogin1 =new AdminLogin({
+            email ,
+            pass  ,
+        })
+        AdminLogin1.save()
+        .then((res2)=>{
+            console.log(res2);
+            res.send(res2)
+        })
+}
+    else res.send({ Error : "Field Are Required"})
 })
 
 

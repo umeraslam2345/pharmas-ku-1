@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState , useEffect} from 'react';
 import { Link , Redirect ,useHistory } from 'react-router-dom';
 
 
@@ -10,8 +10,27 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Header =(props)=> {
 
+
     const [search , setSearch] = useState("")
+    const [DataPart2 , setDataPart2] = useState([])
     let history = useHistory();
+
+
+    useEffect(() =>{
+        setInterval(()=>{
+            var data1 =  JSON.parse(localStorage.getItem("Cart")) 
+         if (data1) {
+             setDataPart2(data1)
+            //  const data = DataPart2.length  
+            //  setDataPart2(data)
+            }
+         else setDataPart2(0)
+        },3000)
+        
+  },[])
+  
+
+
 
     const SubmitData = (e) =>{
         e.preventDefault()
@@ -96,7 +115,7 @@ const Header =(props)=> {
                                         <li>
                                             <Link to="/card" className="site-cart">
                                                 <span className="icon icon-shopping_cart"></span>
-                                                <span className="count">{basket}</span>
+                                                <span className="count">{DataPart2.length}</span>
                                             </Link>
                                         </li>
                                         <li className="d-inline-block d-md-none ml-md-0"><a href="#" className="site-menu-toggle js-menu-toggle"><span className="icon-menu"></span></a></li>

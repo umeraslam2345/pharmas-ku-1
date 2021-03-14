@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
-const AdminSign  = new mongoose.Schema({
-    Email : String,
-    Password : String ,
-    Phone : String,
-
+const AdminLogin  = new mongoose.Schema({
+    email : String,
+    pass : String ,
 })
-module.exports = mongoose.model("Admin Sign" , AdminSign)
+module.exports = mongoose.model("Admin Sign" , AdminLogin)
 

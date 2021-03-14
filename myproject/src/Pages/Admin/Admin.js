@@ -5,11 +5,11 @@ import Fab from '@material-ui/core/Fab';
 import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 
 
-export default function Admin() {
+const Admin = (props) => {
   const [product , setproduct] = useState([])
   const [checkout , setcheckout] = useState([])
   useEffect(() =>{
-  
+  if ( JSON.parse(localStorage.getItem("Admin")) ){
     fetch("http://localhost:3000/AllUserCheckoutData",{
       method: "GET",
        headers :  {
@@ -34,6 +34,11 @@ export default function Admin() {
    .then(res2=>{
     setproduct(res2)
    })
+  }
+  else{
+    props.history.push("/admin")
+  }
+    
  },[])
 
 
@@ -198,3 +203,5 @@ export default function Admin() {
             </div>
     )
 }
+
+export default Admin 

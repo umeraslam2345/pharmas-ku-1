@@ -20,6 +20,7 @@ import CheckoutUser from './Pages/Admin/CheckoutUser';
 import CategoriesShop from './Pages/CategoriesShop';
 import SearchData from './Pages/SearchData';
 import CheckoutUserOrderData from './Pages/Admin/CheckoutUserOrderData';
+import LoginAdmin from './Pages/Admin/LoginAdmin';
 function App() {
   return (
     <div className="App">
@@ -31,6 +32,7 @@ function App() {
           <Route exact path='/' component={Home} />
           {/* <Route exact path='/Header12345678' component={Header} /> */}
           <Route exact path='/admin' component={Admin} />
+          <Route exact path='/login-admin' component={LoginAdmin} />
           <Route exact path='/createProduct' component={createProduct} />
           <Route exact path='/allproduct' component={AllProduct} />
           <Route exact path='/allcheckoutuser' component={CheckoutUser} />
