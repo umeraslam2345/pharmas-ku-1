@@ -52,7 +52,7 @@ const Home = ( props ) => {
 
     useEffect(() =>{
   
-        fetch("http://localhost:3000/AllProduct",{
+        fetch("/AllProduct",{
        method: "GET",
         headers :  {
         "Content-Type" : "application/json" , 
@@ -73,7 +73,7 @@ const Home = ( props ) => {
 
    })
     
-    fetch("http://localhost:3000/AllCategories",{
+    fetch("/AllCategories",{
        method: "GET",
         headers :  {
         "Content-Type" : "application/json" , 
@@ -86,7 +86,7 @@ const Home = ( props ) => {
    })
 
     
-    fetch("http://localhost:3000/AllHomomethtic",{
+    fetch("/AllHomomethtic",{
        method: "GET",
         headers :  {
         "Content-Type" : "application/json" , 

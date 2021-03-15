@@ -36,7 +36,7 @@ export default class createProduct extends Component {
                     // setUrl(res2.url)
                     if(res2.url !== ""){
                        
-                        fetch("/AdminCreateProduct",{
+                        fetch("http://localhost:3000/AdminCreateProduct",{
                                     method: "POST",
                                     headers :  {
                                         "Content-Type" : "application/json" , 

@@ -15,7 +15,7 @@ const CheckoutUserOrderData = (props) => {
   
      const lasturl = props.match.url.split("/")[2]
      console.log(lasturl)
-        fetch("http://localhost:3000/AllUserCheckoutData",{
+        fetch("/AllUserCheckoutData",{
             method: "GET",
              headers :  {
              "Content-Type" : "application/json" , 
@@ -39,7 +39,7 @@ const CheckoutUserOrderData = (props) => {
 
 
      const deleteProduct = (id) =>{
-        fetch("http://localhost:3000/deleteCheckoutUser/"+id ,{
+        fetch("/deleteCheckoutUser/"+id ,{
           method: "DELETE" , 
           headers: {
             "Content-Type" : "application/json" ,
@@ -60,7 +60,7 @@ const CheckoutUserOrderData = (props) => {
       const SendProduct =(e) =>{
         e.preventDefault()
         console.log(email , text , subject )
-        fetch("http://localhost:3000/SendEmailbyAdmin",{
+        fetch("/SendEmailbyAdmin",{
                         method: "POST",
                         headers :  {
                             "Content-Type" : "application/json" , 

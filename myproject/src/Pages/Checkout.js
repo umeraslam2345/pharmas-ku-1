@@ -73,7 +73,7 @@ const Checkout = () => {
             })
             .then(res3=>res3.json())
             .then((res1)=>{
-                fetch("http://localhost:3000/UsergetDatafromclient",{
+                fetch("/UsergetDatafromclient",{
                         method: "POST",
                         headers :  {
                             "Content-Type" : "application/json" , 

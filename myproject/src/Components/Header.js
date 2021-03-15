@@ -1,5 +1,5 @@
 import React , {useState , useEffect} from 'react';
-import { Link , Redirect ,useHistory } from 'react-router-dom';
+import { Link  ,useHistory } from 'react-router-dom';
 
 
 import logo from '../assets/images/logo1.png';
@@ -31,10 +31,16 @@ const Header =(props)=> {
   
 
 
+useEffect(() => {
+  
+    return () => {
+        clearInterval()
+    }
+  }, [])
 
     const SubmitData = (e) =>{
         e.preventDefault()
-        fetch("http://localhost:3000/SearchProduct",{
+        fetch("/SearchProduct",{
                                 method: "POST",
                                 headers :  {
                                     "Content-Type" : "application/json" , 
@@ -115,7 +121,7 @@ const Header =(props)=> {
                                         <li>
                                             <Link to="/card" className="site-cart">
                                                 <span className="icon icon-shopping_cart"></span>
-                                                <span className="count">{DataPart2.length}</span>
+                                                <span className="count">{DataPart2.length ? DataPart2.length : 0}</span>
                                             </Link>
                                         </li>
                                         <li className="d-inline-block d-md-none ml-md-0"><a href="#" className="site-menu-toggle js-menu-toggle"><span className="icon-menu"></span></a></li>

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const Port = process.env.PORT || 3000  ;
+const Port = process.env.PORT || 3001  ;
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const {Url} = require('./config/key')
@@ -21,7 +21,7 @@ const nodemailer = require("nodemailer")
 
 
 
-mongoose.connect(Url,{
+mongoose.connect("mongodb+srv://User:user12345@cluster0.3hib2.mongodb.net/Project0?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true ,
     useFindAndModify :  false ,

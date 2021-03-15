@@ -10,7 +10,7 @@ const Admin = (props) => {
   const [checkout , setcheckout] = useState([])
   useEffect(() =>{
   if ( JSON.parse(localStorage.getItem("Admin")) ){
-    fetch("http://localhost:3000/AllUserCheckoutData",{
+    fetch("/AllUserCheckoutData",{
       method: "GET",
        headers :  {
        "Content-Type" : "application/json" , 
@@ -24,7 +24,7 @@ const Admin = (props) => {
 
 
 
-    fetch("http://localhost:3000/AllProduct",{
+    fetch("/AllProduct",{
        method: "GET",
         headers :  {
         "Content-Type" : "application/json" , 

@@ -25,7 +25,7 @@ const SearchData = (props) =>{
         },3000)
        
                          
-            fetch("http://localhost:3000/AllCategories",{
+            fetch("/AllCategories",{
                 method: "GET",
                     headers :  {
                     "Content-Type" : "application/json" , 

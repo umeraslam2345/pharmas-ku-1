@@ -4,7 +4,7 @@ const AllProduct = () => {
     const [data , setdata] = useState([])
     useEffect(() =>{
   
-        fetch("http://localhost:3000/AllProduct",{
+        fetch("/AllProduct",{
            method: "GET",
             headers :  {
             "Content-Type" : "application/json" , 
@@ -22,7 +22,7 @@ const AllProduct = () => {
 
 
      const deleteProduct = (id) =>{
-        fetch("http://localhost:3000/deletePost/"+id ,{
+        fetch("/deletePost/"+id ,{
           method: "DELETE" , 
           headers: {
             "Content-Type" : "application/json" ,

@@ -8,7 +8,7 @@ const CheckoutUser = () => {
     useEffect(() =>{
   
      
-        fetch("http://localhost:3000/AllUserCheckoutData",{
+        fetch("/AllUserCheckoutData",{
             method: "GET",
              headers :  {
              "Content-Type" : "application/json" , 
@@ -25,7 +25,7 @@ const CheckoutUser = () => {
 
 
      const deleteProduct = (id) =>{
-        fetch("http://localhost:3000/deleteCheckoutUser/"+id ,{
+        fetch("/deleteCheckoutUser/"+id ,{
           method: "DELETE" , 
           headers: {
             "Content-Type" : "application/json" ,

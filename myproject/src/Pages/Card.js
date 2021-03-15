@@ -14,16 +14,21 @@ const Card = ()=> {
 
 
     useEffect(() =>{
-        setInterval(()=>{
-           let data =  JSON.parse(localStorage.getItem("Cart")) 
-           setCart(data)
+        // setInterval(()=>{
+        //     let data =  JSON.parse(localStorage.getItem("Cart")) 
+        //     if(data)
+        //    setCart(data)
+        //    else      setCart(0)
 
-           let data5 =  JSON.parse(localStorage.getItem("CartPrice")) 
-           settotal1(data5)
+        //    let data5 =  JSON.parse(localStorage.getItem("CartPrice")) 
+        //    settotal1(data5)
           
-        },3000)
+        // },3000)
         let data =  JSON.parse(localStorage.getItem("Cart")) 
+        // if(data)
         setCart(data)
+        // else      setCart(0)
+
  if (data) {
             var j = 0
             data.map((item,i)=>{
@@ -45,12 +50,12 @@ const Card = ()=> {
   },[])
   
 
-useEffect(() => {
+// useEffect(() => {
   
-    return () => {
-        clearInterval()
-    }
-  }, [])
+//     return () => {
+//         clearInterval()
+//     }
+//   }, [])
 
   const removeData = (id) =>{
     var data =  JSON.parse(localStorage.getItem("Cart")) 
@@ -128,7 +133,7 @@ useEffect(() => {
 
                                                             </td>
                                                             <td>Rs {item.Product_Price}</td>
-                                                            <td><Link onClick={()=>removeData(item._id)} className="btn btn-primary btn-sm">X</Link></td>
+                                                            <td><button onClick={()=>removeData(item._id)} className="btn btn-primary btn-sm">X</button></td>
                                                         </tr>
                                                     )
                                             }) : <tr><td colSpan="6"><div className="col-sm-12 col-lg-12 mb-12"><center> <h3> No Product in Card</h3></center> </div></td></tr> 

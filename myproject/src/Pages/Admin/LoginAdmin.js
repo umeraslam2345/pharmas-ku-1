@@ -17,7 +17,7 @@ const postData = (e) =>{
         swal("Enter The Password !"  )
            return
          }
-      fetch("http://localhost:3000/logIn",{
+      fetch("/logIn",{
         method: 'POST' , 
         headers :  {
           "Content-Type" : "application/json" , 

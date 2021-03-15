@@ -19,7 +19,7 @@ const CategoriesShop = (props)=> {
         setCategoriesUrl(data1)
         // var Category1 =  CategoriesUrl.split("-").join(" ")
         
-        fetch("http://localhost:3000/CategoriesShop",{
+        fetch("/CategoriesShop",{
                                 method: "GET",
                                 headers :  {
                                     "Content-Type" : "application/json" , 
@@ -35,7 +35,7 @@ const CategoriesShop = (props)=> {
                                 console.log(Pro);
                             })
         // console.log(Catego/ry1);
-            fetch("http://localhost:3000/AllCategories",{
+            fetch("/AllCategories",{
                 method: "GET",
                     headers :  {
                     "Content-Type" : "application/json" , 
