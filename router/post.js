@@ -85,6 +85,8 @@ app.post("/logIn" ,(req, res) => {
 
 
 
+
+
 app.post("/UsergetDatafromclient" ,(req, res) => {
     console.log(req.body);
     const { fname ,Lname,Order, Email,DoctorPrescipsion ,Address ,Address1 , Phone , ZipPostal   , StateCountry    ,Select_Country    ,Order_Notes  } = req.body;
@@ -152,25 +154,7 @@ app.post("/AdminCreateProduct" ,(req, res) => {
                 })
                 CreateProduct.save()
                 .then((res4)=>{
-                    ProductCatogories.findOne({Categories :Product_Catagories })
-                    .then((res2)=>{
-
-                        console.log(res4);
-                    if (res2 === null) {
-                        const CreateProductCatogories = new ProductCatogories({
-                            Categories  : Product_Catagories,
-                                })
-                                CreateProductCatogories.save()
-                                .then((res3) =>{
-                                    res.send({res3,res4})
-                                })
-                                .catch((err) =>{
-                                    res.json({Error : "There Is An Error"})
-                                })
-                        }else{
-                            res.send(res4)
-                        }
-                    })
+                  res.send(res4)
                     })
                     
                 .catch((err) =>{
@@ -184,6 +168,117 @@ app.post("/AdminCreateProduct" ,(req, res) => {
             }
     else res.json({ Error : "Field Are Required"})
 })
+
+
+
+
+
+
+
+
+
+
+
+
+app.put("/AdminCreateProductCategories" ,(req, res) => {
+    console.log(req.body);
+                            const { Categories ,
+                                     } 
+                                    = req.body;
+
+    if( Categories  ){
+           console.log(Categories); 
+        
+                    ProductCatogories.findOne({Categories :Product_Catagories })
+                    .then((res2)=>{
+                        console.log(res2);
+                    if (res2) {
+                        coun = res2.count
+                        ProductCatogories.findByIdAndUpdate(res2._id , {
+                                $push : {count : coun + 1}
+                            },{
+                                new : true
+                            },(err, user) => {
+                                if(err){
+                                    return res.json({Error : "User Not Found"})
+                                }
+                                res.send(user)
+                                
+                            })
+
+
+                       
+                        }else{
+                            
+ const CreateProductCatogories = new ProductCatogories({
+                            Categories  : Product_Catagories,
+                            count : 1
+                                })
+                                CreateProductCatogories.save()
+                                .then((res3) =>{
+                                    res.send({res3,res4})
+                                })
+                                .catch((err) =>{
+                                    res.json({Error : "There Is An Error"})
+                                })
+
+
+
+
+
+
+
+
+
+
+
+
+                        }
+                    })
+                    
+                .catch((err) =>{
+                    res.json({Error : "There Is An Error"})
+                })
+
+
+              
+  
+                
+            }
+    else res.json({ Error : "Field Are Required"})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

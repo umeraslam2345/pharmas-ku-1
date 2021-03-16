@@ -93,7 +93,7 @@ useEffect(() => {
     const basket = useSelector((state) => state.basket);
         
         return (
-            <header className="site-navbar" role="banner" >
+            <header className="site-navbar" role="banner">
 
                 <div className="site-navbar-top">
                     <div className="container">
@@ -116,8 +116,8 @@ useEffect(() => {
                             <div className="col-6 col-md-4 order-3 order-md-3 text-right">
                                 <div className="site-top-icons">
                                     <ul>
-                                        <li><Link to="/login/user"><span className="icon icon-person"></span></Link></li>
-                                        <li><Link to="/favorite-product"><span className="icon icon-heart-o"></span></Link></li>
+                                        {/* <li><Link to="/login/user"><span className="icon icon-person"></span></Link></li> */}
+                                        {/* <li><Link to="/favorite-product"><span className="icon icon-heart-o"></span></Link></li> */}
                                         <li>
                                             <Link to="/card" className="site-cart">
                                                 <span className="icon icon-shopping_cart"></span>

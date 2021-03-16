@@ -46,6 +46,7 @@ const responsive = {
 
 const Home = ( props ) => {
     const [Categories , setCategories] = useState([])
+    const [Categories1 , setCategories1] = useState([])
     const [Homo , setHomo] = useState([])
     const [product , setproduct] = useState([])
     const [product1 , setproduct1] = useState([])
@@ -82,6 +83,36 @@ const Home = ( props ) => {
    .then(res=>res.json())
    .then(res1=>{
     setCategories(res1)
+    
+    fetch("/AllProduct",{
+        method: "GET",
+         headers :  {
+         "Content-Type" : "application/json" , 
+     }
+    })
+    .then(res7=>res7.json())
+    .then(res8=>{
+        res8.map((res9,i)=>{
+            res1.map((res10,i)=>{
+                console.log(res9.Product_Catagories,res10.Categories);
+                if (res9.Product_Catagories === res10){
+                    setCategories1([{Product_Catagories : res9.Product_Catagories ,count : i+1}])
+            }
+        })
+        })
+        console.log(Categories1);
+     //    console.log(res6);
+    //     setproduct(res6)
+    //     const pro = res6.map((res7,i)=>{
+    //      //    console.log(res7.Product_Popular );
+    //         if ( res7.Product_Popular === "yes"){
+    //          //    console.log(res7);
+    //  //         // return setproduct1(...product1 , res3)
+    //          return  res7
+    //         }
+    //     })
+ 
+    })
     // console.log(res1);
    })
 
@@ -135,7 +166,7 @@ const Home = ( props ) => {
 
 
 
-                <div className="container-fuild" style={{width : "99% " ,padding : "0px 10px"}}>
+                <div className="container-fuild" style={{width : "99% " ,padding : "0px 10px" }}>
                         <div className="row">
 
                             <div className="block-none-cato col-xl-2 col-lg-2">
@@ -148,7 +179,7 @@ const Home = ( props ) => {
                                                 return( <li className="mb-1" key={i}>
                                                             <Link   onClick={()=>cate(res.Categories)} className="d-flex">
                                                                 <span>{res.Categories}</span> 
-                                                                <span className="text-black ml-auto">(2,220)</span>
+                                                                {/* <span className="text-black ml-auto">(2,220)</span> */}
                                                             </Link>
                                                         </li>
 
@@ -181,11 +212,11 @@ const Home = ( props ) => {
                 </div>
 
 
-                <div className="site-section block-3 site-blocks-2 bg-light">
-                    <div className="container-fuild" style={{width : "97%"}}>
+                <div className="site-section block-3 site-blocks-2"  style={{background : "#66605b"}}>
+                    <div className="container-fuild" style={{width : "98%"}}>
                         <div className="row justify-content-center">
-                            <div className="col-md-7 site-section-heading text-center pt-4">
-                                <h2>Popular Products</h2>
+                            <div className="col-md-7 site-section-heading text-center pt-4 ">
+                                <h2 style={{color : "white",marginLeft : "-34px"}} >Popular Products</h2>
                             </div>
                         </div>
                         <div className="row">
@@ -276,11 +307,11 @@ const Home = ( props ) => {
 
 
 
-                <div className="site-section block-3 site-blocks-2 bg-light">
-                    <div className="container-fuild" style={{width : "97%"}}>
+                <div className="site-section block-3 site-blocks-2" style={{background : "#66605b"}}>
+                    <div className="container-fuild" style={{width : "98%"}} >
                         <div className="row justify-content-center">
                             <div className="col-md-7 site-section-heading text-center pt-4">
-                                <h2>Homeopathic & Herbal Products</h2>
+                                <h2 style={{color : "white",marginLeft : "-44px"}} >Homeopathic & Herbal Products</h2>
                             </div>
                         </div>
                         <div className="row">

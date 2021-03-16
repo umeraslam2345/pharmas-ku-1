@@ -263,7 +263,7 @@ const cate =(Categories) =>{
                                                 return( <li className="mb-1" key={i}>
                                                             <Link   onClick={()=>cate(res.Categories)} className="d-flex">
                                                                 <span>{res.Categories}</span> 
-                                                                <span className="text-black ml-auto">(2,220)</span>
+                                                                {/* <span className="text-black ml-auto">(2,220)</span> */}
                                                             </Link>
                                                         </li>
 

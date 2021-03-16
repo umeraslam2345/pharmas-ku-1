@@ -57,10 +57,27 @@ export default class createProduct extends Component {
                                 .then((res2)=>{        
                                 if(res2.Error){
                                     swal(res2.Error);
-                                    // M.toast({html: res2.Error,classes:"#c62828 red darken-3"})
                                 }
                                 else{
-                                    swal("Successfully Submit your Order!");
+                                    fetch("/AdminCreateProductCategories",{
+                                        method: "PUT",
+                                        headers :  {
+                                            "Content-Type" : "application/json" , 
+                                        } ,
+                                        body : JSON.stringify({
+                                            Catagories: this.state.Product_Catagories ,
+                                            id : res2._id
+                                        })
+                                    })
+                                    .then(res3=>res3.json())
+                                    .then((res4)=>{        
+                                    if(res4.Error){
+                                        swal(res4.Error);
+                                    }
+                                    else{
+                                        swal("Successfully Submit your Order!");
+                                    }
+                                })
                                 }
                             })
                             .catch(err=>{
