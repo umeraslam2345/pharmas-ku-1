@@ -2,7 +2,7 @@ import React, {useState , useEffect} from 'react';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 
-const Checkout = () => {
+const Checkout = (props) => {
     const [fname , setfName ] = useState("")
     const [Lname , setLName ] = useState("")
     const [CName , setCName ] = useState("")
@@ -103,11 +103,13 @@ const Checkout = () => {
                         swal("Successfully Submit your Order!");
                         localStorage.removeItem("Cart")
                         localStorage.removeItem("doctor")
+                        props.history.push(`/thankyou`)
+
                      }
                   })
                   .catch(err=>{
-                      console.log("There is An Error")                  
-                    })
+                    swal("There is an Error");
+                })
 
 
             })
@@ -128,11 +130,11 @@ const Checkout = () => {
                 <div className="site-section">
                     <div className="container">
                         <div className="row mb-5">
-                            <div className="col-md-12">
+                            {/* <div className="col-md-12">
                                 <div className="border p-4 rounded" role="alert">
                                     Returning customer? <a href="#">Click here</a> to login
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="row">
                             <div className="col-md-6 mb-5 mb-md-0">
@@ -140,7 +142,8 @@ const Checkout = () => {
                                 <div className="p-3 p-lg-5 border">
                                     <div className="form-group">
                                         <label htmlFor="c_country" className="text-black">Country <span className="text-danger">*</span></label>
-                                        <select id="c_country"  value={Select_Country} onChange={(e)=>setSelect_Country(e.target.value)}  className="form-control">
+                                        <input type="text"  required value={Select_Country} onChange={(e)=>setSelect_Country(e.target.value)}  className="form-control" />
+                                        {/* <select id="c_country" className="form-control">
                                             <option value="1">Select a country</option>
                                             <option value="2">bangladesh</option>
                                             <option value="3">Algeria</option>
@@ -150,62 +153,62 @@ const Checkout = () => {
                                             <option value="7">Bahrain</option>
                                             <option value="8">Colombia</option>
                                             <option value="9">Dominican Republic</option>
-                                        </select>
+                                        </select> */}
                                     </div>
                                     <div className="form-group row">
                                         <div className="col-md-6">
                                             <label htmlFor="c_fname" className="text-black">First Name <span className="text-danger">*</span></label>
-                                            <input type="text"  value={fname} onChange={(e)=>setfName(e.target.value)}  className="form-control" id="c_fname" name="c_fname" />
+                                            <input type="text" required value={fname} onChange={(e)=>setfName(e.target.value)}  className="form-control" id="c_fname" name="c_fname" />
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="c_lname" className="text-black">Last Name <span className="text-danger">*</span></label>
-                                            <input type="text"  value={Lname} onChange={(e)=>setLName(e.target.value)}  className="form-control" id="c_lname" name="c_lname" />
+                                            <input type="text" required value={Lname} onChange={(e)=>setLName(e.target.value)}  className="form-control" id="c_lname" name="c_lname" />
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
                                         <div className="col-md-12">
                                             <label htmlFor="c_companyname" className="text-black">Company Name </label>
-                                            <input type="text" value={CName} onChange={(e)=>setCName(e.target.value)} className="form-control" id="c_companyname" name="c_companyname" />
+                                            <input type="text"required value={CName} onChange={(e)=>setCName(e.target.value)} className="form-control" id="c_companyname" name="c_companyname" />
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
                                         <div className="col-md-12">
                                             <label htmlFor="c_address" className="text-black">Address <span className="text-danger">*</span></label>
-                                            <input type="text"  value={Address} onChange={(e)=>setAddress(e.target.value)}   className="form-control" id="c_address" name="c_address" placeholder="Street address" />
+                                            <input type="text" required value={Address} onChange={(e)=>setAddress(e.target.value)}   className="form-control" id="c_address" name="c_address" placeholder="Street address" />
                                         </div>
                                     </div>
 
                                     <div className="form-group">
-                                        <input type="text"  value={Address1} onChange={(e)=>setAddress1(e.target.value)}  className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
+                                        <input type="text" required value={Address1} onChange={(e)=>setAddress1(e.target.value)}  className="form-control" placeholder="Apartment, suite, unit etc. (optional)" />
                                     </div>
 
                                     <div className="form-group row">
                                         <div className="col-md-6">
                                             <label htmlFor="c_state_country" className="text-black">State / Country <span className="text-danger">*</span></label>
-                                            <input type="text"  value={StateCountry} onChange={(e)=>setStateCountry(e.target.value)} className="form-control" id="c_state_country" name="c_state_country" />
+                                            <input type="text" required value={StateCountry} onChange={(e)=>setStateCountry(e.target.value)} className="form-control" id="c_state_country" name="c_state_country" />
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="c_postal_zip" className="text-black">Posta / Zip <span className="text-danger">*</span></label>
-                                            <input type="text"  value={ZipPostal} onChange={(e)=>setZipPostal(e.target.value)}  className="form-control" id="c_postal_zip" name="c_postal_zip" />
+                                            <input type="text" required value={ZipPostal} onChange={(e)=>setZipPostal(e.target.value)}  className="form-control" id="c_postal_zip" name="c_postal_zip" />
                                         </div>
                                     </div>
 
                                     <div className="form-group row mb-5">
                                         <div className="col-md-6">
                                             <label htmlFor="c_email_address" className="text-black">Email Address <span className="text-danger">*</span></label>
-                                            <input type="text"  value={Email} onChange={(e)=>setEmail(e.target.value)} className="form-control" id="c_email_address" name="c_email_address" />
+                                            <input type="text" required value={Email} onChange={(e)=>setEmail(e.target.value)} className="form-control" id="c_email_address" name="c_email_address" />
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor="c_phone" className="text-black">Phone <span className="text-danger">*</span></label>
-                                            <input type="tel"  value={Phone} onChange={(e)=>setPhone(e.target.value)}   className="form-control" id="c_phone" name="c_phone" placeholder="Phone Number" />
+                                            <input type="tel" required value={Phone} onChange={(e)=>setPhone(e.target.value)}   className="form-control" id="c_phone" name="c_phone" placeholder="Phone Number" />
                                         </div>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="c_order_notes" className="text-black">Order Notes</label>
-                                        <textarea name="c_order_notes" value={Order_Notes} onChange={(e)=>setOrder_Notes(e.target.value)} id="c_order_notes" cols="30" rows="5" className="form-control" placeholder="Write your notes here..."></textarea>
+                                        <textarea name="c_order_notes"required value={Order_Notes} onChange={(e)=>setOrder_Notes(e.target.value)} id="c_order_notes" cols="30" rows="5" className="form-control" placeholder="Write your notes here..."></textarea>
                                     </div>
 
                                     {
