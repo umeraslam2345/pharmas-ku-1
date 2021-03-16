@@ -54,7 +54,7 @@ const Admin = (props) => {
 
 
 
-                  <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
+                  {/* <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">
                       <div class="card-body">
                         <div  style={{display :  "flex" , justifyContent : "space-between" , alignItems : "center"}}>
@@ -68,7 +68,7 @@ const Admin = (props) => {
                           </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">

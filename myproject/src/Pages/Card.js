@@ -14,20 +14,21 @@ const Card = ()=> {
 
 
     useEffect(() =>{
-        // setInterval(()=>{
-        //     let data =  JSON.parse(localStorage.getItem("Cart")) 
-        //     if(data)
-        //    setCart(data)
-        //    else      setCart(0)
+       const Inter = setInterval(()=>{
+            let data =  JSON.parse(localStorage.getItem("Cart")) 
+            if(data)
+           setCart(data)
+           else      setCart(0)
 
-        //    let data5 =  JSON.parse(localStorage.getItem("CartPrice")) 
-        //    settotal1(data5)
+           let data5 =  JSON.parse(localStorage.getItem("CartPrice")) 
+           settotal1(data5)
           
-        // },3000)
+        },3000)
+
         let data =  JSON.parse(localStorage.getItem("Cart")) 
-        // if(data)
+        if(data)
         setCart(data)
-        // else      setCart(0)
+        else      setCart(0)
 
  if (data) {
             var j = 0
@@ -47,6 +48,9 @@ const Card = ()=> {
         // var f = document.getElementById("total")
         // f.innerHTML = "Rs " +j
       
+
+        return () => clearInterval(Inter);
+
   },[])
   
 
@@ -57,21 +61,25 @@ const Card = ()=> {
 //     }
 //   }, [])
 
-  const removeData = (id) =>{
-    var data =  JSON.parse(localStorage.getItem("Cart")) 
-     var j = 0
-    data.map((res,i)=>{
-        if (res._id === id)
-         j += res.Product_Price 
-    })
-    var data1 = data.filter((res,i)=>{
+  const removeDatas = (id) =>{
+    // var data =  JSON.parse(localStorage.getItem("Cart")) 
+    //  var j = 0
+    // data.map((res,i)=>{
+    //     if (res._id === id)
+    //      j += res.Product_Price 
+    // })
+    var data1 = cart.filter((res,i)=>{
         return res._id !== id
     })
     localStorage.setItem("Cart" ,JSON.stringify(data1))
 
-   
-    let data5 =  JSON.parse(localStorage.getItem("CartPrice"))     
-    j =  data5 - j
+        var j = 0
+    data1.map((res,i)=>{
+        // if (res._id === id)
+         j += res.Product_Price 
+    })
+    // let data5 =  JSON.parse(localStorage.getItem("CartPrice"))     
+    // total1 =  data5 - total1
     if ( j !== 0){
         localStorage.setItem("CartPrice",JSON.stringify( j))
     }
@@ -97,7 +105,7 @@ const Card = ()=> {
                 <div className="site-section">
                     <div className="container">
                         <div className="row mb-5">
-                            <form className="col-md-12" method="post">
+                            <form className="col-md-12">
                                 <div className="site-blocks-table">
                                     <table className="table table-bordered">
                                         <thead>
@@ -133,7 +141,7 @@ const Card = ()=> {
 
                                                             </td>
                                                             <td>Rs {item.Product_Price}</td>
-                                                            <td><button onClick={()=>removeData(item._id)} className="btn btn-primary btn-sm">X</button></td>
+                                                            <td><button onClick={()=>removeDatas(item._id)} className="btn btn-primary btn-sm">X</button></td>
                                                         </tr>
                                                     )
                                             }) : <tr><td colSpan="6"><div className="col-sm-12 col-lg-12 mb-12"><center> <h3> No Product in Card</h3></center> </div></td></tr> 

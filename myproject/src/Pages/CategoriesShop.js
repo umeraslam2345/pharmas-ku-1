@@ -13,7 +13,9 @@ const CategoriesShop = (props)=> {
     const [fal , setFal] = useState(false)
     const [fal1 , setFal1] = useState(false)
     useEffect(() =>{
-        var data1 = JSON.parse(localStorage.getItem("Cate")) 
+        const Inter = setInterval(()=>{
+             if (!JSON.parse(localStorage.getItem("CateProduct")) ){
+             var data1 = JSON.parse(localStorage.getItem("Cate")) 
 
         // var Category =  props.match.url.split("/")
         setCategoriesUrl(data1)
@@ -47,7 +49,31 @@ const CategoriesShop = (props)=> {
                 // console.log(res1);
             })
 
-    
+        }
+        else{
+            var data1 = JSON.parse(localStorage.getItem("Cate")) 
+
+            setCategoriesUrl(data1)
+            
+            const Pro = JSON.parse(localStorage.getItem("CateProduct"))
+                                    setProduct(Pro)
+                                    console.log(Pro);
+                fetch("/AllCategories",{
+                    method: "GET",
+                        headers :  {
+                        "Content-Type" : "application/json" , 
+                    } ,
+                })
+                .then(res4=>res4.json())
+                .then(res5=>{
+                    setCategories(res5)
+                    // console.log(res1);
+                })
+        }
+       
+        },1000)
+       
+    return () => clearInterval(Inter);
 
 },[])
 
@@ -56,6 +82,12 @@ const savethedetailproduct = (data) =>{
     localStorage.setItem("Data" , JSON.stringify(data) )
     console.log(data);
  }
+// useEffect(() => {
+  
+//     return () => {
+//         clearInterval()
+//     }
+//   }, [])
 
 
 
@@ -102,7 +134,24 @@ const cate =(Categories) =>{
     var Cat1 = Categories.split(" ").join("-")
 
     localStorage.setItem("Cate" , JSON.stringify(Categories) )
-    
+    fetch("/CategoriesShop",{
+        method: "GET",
+        headers :  {
+            "Content-Type" : "application/json" , 
+        }
+    })
+    .then(res=>res.json())
+    .then(res1=>{
+        const Pro = res1.filter((res2,i)=>{
+            console.log(res2.Product_Catagories , " 1 ",Categories);
+            // console.log(res2.Product_Catagories=== Category1,res2.Product_Catagories , " yyy  ", Category1);
+            return res2.Product_Catagories === Categories
+        })
+        console.log(Pro);
+        localStorage.setItem("CateProduct" , JSON.stringify(Pro) )
+        // setProduct(Pro)
+        // console.log(Pro);
+    })
     setTimeout(()=>{
         props.history.push(`/shop/categories/${Cat1}`)
     },1500)

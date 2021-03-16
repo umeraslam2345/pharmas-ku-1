@@ -66,28 +66,35 @@ const addtocartproduct = () =>{
         if (data1){
             var data3 = data1.map((item) => {
                 if(item._id === data._id){
+                    console.log("double");
 ;                   localStorage.setItem("double",JSON.stringify(true))
                     return {...item,
                          price : Price + item.price,
                          Product_Price  : (productDetail.Product_Price * Price )+ item.Product_Price}
                 }
                 else{
+                    console.log("double not match");
                     return item
                 }
 
             })
             var data5 =  JSON.parse(localStorage.getItem("double")) 
             console.log(DataPart2.length, data3.length,data5);
-            if(DataPart2.length=== data3.length && data5){
+            var data10 =  JSON.parse(localStorage.getItem("Cart")) 
+
+            if(data10.length=== data3.length && data5){
+                console.log("double remove");
                 localStorage.removeItem("double")
                 localStorage.setItem("Cart" , JSON.stringify(data3) )
             }
             else{
+                console.log("Differet");
                 var data2 = [...data1 , data]
            localStorage.setItem("Cart" , JSON.stringify(data2) )
             }
         }
         else{
+            console.log("1");
             localStorage.setItem("Cart" , JSON.stringify([data]) )
         }
         // setTimeout(()=>{

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 
 
 import blockCover from '../assets/images/hero_1.jpg';
+import categ from '../assets/images/cate.jpeg';
 import women from '../assets/images/women.jpg';
 import children from '../assets/images/children.jpg';
 import men from '../assets/images/men.jpg';
@@ -389,7 +390,7 @@ const Home = ( props ) => {
                                                 <div key={i} className="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" style={{margin: "10px 0px"}} data-aos="fade" data-aos-delay="">
                                                     <Link className="block-2-item"  onClick={()=>cate(res.Categories)}>
                                                         <figure className="image">
-                                                            <img src={women} alt="" className="img-fluid" />
+                                                            <img src={categ} alt="" className="img-fluid" style={{height : "500px"}}/>
                                                         </figure>
                                                         <div className="text">
                                                             <span className="text-uppercase">Collections</span>
