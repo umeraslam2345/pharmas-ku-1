@@ -15,6 +15,14 @@ export default class createProduct extends Component {
         Product_Popular : "",
         url : ""
     }
+
+
+    componentDidMount(){
+        if (! JSON.parse(localStorage.getItem("Admin")) ){
+            this.props.history.push("/login-admin")
+        }
+    }
+
  SubmitDataMessage = (e) =>{
             e.preventDefault()
             console.log("wddde");
@@ -59,25 +67,7 @@ export default class createProduct extends Component {
                                     swal(res2.Error);
                                 }
                                 else{
-                                    fetch("/AdminCreateProductCategories",{
-                                        method: "PUT",
-                                        headers :  {
-                                            "Content-Type" : "application/json" , 
-                                        } ,
-                                        body : JSON.stringify({
-                                            Catagories: this.state.Product_Catagories ,
-                                            id : res2._id
-                                        })
-                                    })
-                                    .then(res3=>res3.json())
-                                    .then((res4)=>{        
-                                    if(res4.Error){
-                                        swal(res4.Error);
-                                    }
-                                    else{
-                                        swal("Successfully Submit your Order!");
-                                    }
-                                })
+                                        swal("Successfully Upload your Product!");
                                 }
                             })
                             .catch(err=>{

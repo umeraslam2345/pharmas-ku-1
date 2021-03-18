@@ -15,6 +15,7 @@ const CheckoutData  = new mongoose.Schema({
     Select_Country   : String ,
     Order_Notes : String ,
     Date  : String ,
+    Seen : Boolean ,
     DoctorPrescipsion : String ,
     Order  : [{type:Object}]
 })

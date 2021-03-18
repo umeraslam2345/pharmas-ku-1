@@ -19,12 +19,7 @@ const SearchData = (props) =>{
         var data2 = JSON.parse(localStorage.getItem("SearchData")) 
         
             setProduct(data2)
-        setInterval(()=>{
-             var data2 = JSON.parse(localStorage.getItem("SearchData")) 
-            setProduct(data2)
-        },3000)
-       
-                         
+                    
             fetch("/AllCategories",{
                 method: "GET",
                     headers :  {
@@ -36,19 +31,16 @@ const SearchData = (props) =>{
                 setCategories(res5)
                 // console.log(res1);
             })
+ const da = setInterval(()=>{
+             var data2 = JSON.parse(localStorage.getItem("SearchData")) 
+            setProduct(data2)
+        },3000)
+    return () => clearInterval(da);
 
-    
 
 },[])
 
 
-
-useEffect(() => {
-  
-    return () => {
-        clearInterval()
-    }
-  }, [])
 
 
 

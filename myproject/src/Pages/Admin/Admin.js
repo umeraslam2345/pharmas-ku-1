@@ -36,7 +36,7 @@ const Admin = (props) => {
    })
   }
   else{
-    props.history.push("/admin")
+    props.history.push("/login-admin")
   }
     
  },[])
@@ -95,12 +95,12 @@ const Admin = (props) => {
                           <p class="card-text"  style={{paddingLeft : "15px"}}><Link to="createProduct">Click here</Link></p>
                           <div style={{display :  "flex" , justifyContent : "flex-start" , alignItems : "center"}}>
                               <AssignmentTurnedInOutlinedIcon  style={{margin : "0px 15px 20px 0px" , fontSize :  "30" , color : "rgb(45, 206, 137)"}}/> 
-                              <p>Total 5 Product Right Now </p>
+                              {/* <p>Total 5 Product Right Now </p> */}
                           </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
+                  {/* <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">
                       <div class="card-body">
                         <div  style={{display :  "flex" , justifyContent : "space-between" , alignItems : "center"}}>
@@ -114,22 +114,22 @@ const Admin = (props) => {
                           </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
+                  </div> */}
+                  {/* <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">
                       <div class="card-body">
                         <div  style={{display :  "flex" , justifyContent : "space-between" , alignItems : "center"}}>
                           <p class="card-title changeTitle">Delivered Item</p>
                           <Fab><GroupWorkIcon fontSize="large"/></Fab>
                         </div>
-                          <p class="card-text"  style={{paddingLeft : "15px"}}>See More</p>
+                          <p class="card-text"  style={{paddingLeft : "15px"}}> <Link to=""> See More </Link> </p>
                           <div style={{display :  "flex" , justifyContent : "flex-start" , alignItems : "center"}}>
                               <AssignmentTurnedInOutlinedIcon  style={{margin : "0px 15px 20px 0px" , fontSize :  "30" , color : "rgb(45, 206, 137)"}}/> 
                               <p>5 Delivered</p>
                           </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">
@@ -179,7 +179,7 @@ const Admin = (props) => {
                         checkout.map((res,i)=>{
                               return <tr key={i}>
                                         <th scope="row">{i+1}</th>
-                                        <td><img src={res.fullName} alt="Upload" style={{width : "200px" , height : "150px"}}/></td>
+                                        <td><img src={res.DoctorPrescipsion} alt="Upload" style={{width : "200px" , height : "150px"}}/></td>
                                         <td>{res.fullName}</td>
                                         <td>{res.Email}</td>
                                         <td>{res.productName}</td>

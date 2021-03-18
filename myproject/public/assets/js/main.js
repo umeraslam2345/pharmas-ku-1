@@ -60,9 +60,9 @@ jQuery(document).ready(function($) {
 
 		
 
-		// $('.js-logo-clone').clone().appendTo('.site-mobile-menu-logo');
+		$('.js-logo-clone').clone().appendTo('.site-mobile-menu-logo');
 
-		// $('<span class="ion-ios-close js-menu-toggle"></div>').prependTo('.site-mobile-menu-close');
+		$('<span class="ion-ios-close js-menu-toggle"></div>').prependTo('.site-mobile-menu-close');
 		
 
 		$('.js-clone-nav').each(function() {
@@ -71,29 +71,29 @@ jQuery(document).ready(function($) {
 		});
 
 
-	// 	setTimeout(function() {
+		setTimeout(function() {
 			
-	// 		var counter = 0;
-    //   $('.site-mobile-menu .has-children').each(function(){
-    //     var $this = $(this);
+			var counter = 0;
+      $('.site-mobile-menu .has-children').each(function(){
+        var $this = $(this);
         
-    //     $this.prepend('<span class="arrow-collapse collapsed">');
+        $this.prepend('<span class="arrow-collapse collapsed">');
 
-    //     $this.find('.arrow-collapse').attr({
-    //       'data-toggle' : 'collapse',
-    //       'data-target' : '#collapseItem' + counter,
-    //     });
+        $this.find('.arrow-collapse').attr({
+          'data-toggle' : 'collapse',
+          'data-target' : '#collapseItem' + counter,
+        });
 
-    //     $this.find('> ul').attr({
-    //       'class' : 'collapse',
-    //       'id' : 'collapseItem' + counter,
-    //     });
+        $this.find('> ul').attr({
+          'class' : 'collapse',
+          'id' : 'collapseItem' + counter,
+        });
 
-    //     counter++;
+        counter++;
 
-    //   });
+      });
 
-    // }, 1000);
+    }, 1000);
 
 		$('body').on('click', '.arrow-collapse', function(e) {
       var $this = $(this);
@@ -143,21 +143,21 @@ jQuery(document).ready(function($) {
 	siteMenuClone();
 
 
-	// var sitePlusMinus = function() {
-	// 	$('.js-btn-minus').on('click', function(e){
-	// 		e.preventDefault();
-	// 		if ( $(this).closest('.input-group').find('.form-control').val() != 0  ) {
-	// 			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) - 1);
-	// 		} else {
-	// 			$(this).closest('.input-group').find('.form-control').val(parseInt(0));
-	// 		}
-	// 	});
-	// 	$('.js-btn-plus').on('click', function(e){
-	// 		e.preventDefault();
-	// 		$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
-	// 	});
-	// };
-	// sitePlusMinus();
+	var sitePlusMinus = function() {
+		$('.js-btn-minus').on('click', function(e){
+			e.preventDefault();
+			if ( $(this).closest('.input-group').find('.form-control').val() != 0  ) {
+				$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) - 1);
+			} else {
+				$(this).closest('.input-group').find('.form-control').val(parseInt(0));
+			}
+		});
+		$('.js-btn-plus').on('click', function(e){
+			e.preventDefault();
+			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
+		});
+	};
+	sitePlusMinus();
 
 
 	var siteSliderRange = function() {

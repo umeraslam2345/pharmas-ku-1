@@ -35,15 +35,170 @@ export function Detail(props) {
     const [productDetail , setproductDetail] = useState([])
     const [Price , setPrice] = useState(1)
     const [DataPart2 , setDataPart2] = useState([])
+    const [allproduct , setallproduct] = useState([])
 
 
     useEffect(() =>{
-        
+      const Inte = setInterval(()=>{
+
       var data =  JSON.parse(localStorage.getItem("Data")) 
+      if (data) setproductDetail(data)
+
+
+      fetch("/AllProduct",{
+        method: "GET",
+         headers :  {
+         "Content-Type" : "application/json" , 
+     }
+    })
+    .then(res5=>res5.json())
+    .then(res6=>{
+        // console.log(res6);
+        const vc = []
+     res6.map((res7,i)=>{
+            console.log( res7.Product_Catagories , productDetail.Product_Catagories , res7._id , productDetail._id);
+         if (  res7._id !== data._id) {
+             //    console.log(res7);
+             //         // return setproduct1(...product1 , res3)
+             vc.push(res7)
+            //  return  res7
+            }
+        })
+        console.log(vc);
+        
+        if(vc.length >= 1 && vc.length < 5){
+           console.log("yes");
+        res6.map((res7,i)=>{
+            // console.log( res7.Product_Catagories , data.Product_Catagories , res7._id , data._id);
+         if ( res7._id !== data._id) {
+             //    console.log(res7);
+             //         // return setproduct1(...product1 , res3)
+             vc.push(res7)
+            //  return  res7
+            }
+        })
+        for (var i = vc.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = vc[i];
+            vc[i] = vc[j];
+            vc[j] = temp;
+        }
+        let db = vc.slice(0,7)
+        setallproduct(db) 
+        }
+
+        else if (vc.length >= 1 ){
+           console.log("yes");
+           for (var i = vc.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = vc[i];
+            vc[i] = vc[j];
+            vc[j] = temp;
+        }
+           let db = vc.slice(0,7)
+           console.log(db);
+        setallproduct(db)
+        }
+
+        else{
+            const vb = []
+            res6.map((res7,i)=>{
+                //    console.log(res7.Product_Popular );
+                if ( i+1 % 4 === 0) {
+                    
+                    vb.push(res7)
+                    //    console.log(res7);
+                    //         // return setproduct1(...product1 , res3)
+                    // return  res7
+                   }
+               })
+               for (var i = vc.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = vc[i];
+                vc[i] = vc[j];
+                vc[j] = temp;
+            }
+               let db = vb.slice(0,7)
+               console.log(db);
+                setallproduct(db)
+        }
+ 
+        console.log(allproduct);
+    })
+
+       },8000)
+       var data =  JSON.parse(localStorage.getItem("Data")) 
       if (data) setproductDetail(data)
       var data1 =  JSON.parse(localStorage.getItem("Cart")) 
        if (data1) setDataPart2(data1)
-},[])
+
+    //   const Inte = setInterval(()=>{
+            fetch("/AllProduct",{
+        method: "GET",
+         headers :  {
+         "Content-Type" : "application/json" , 
+     }
+    })
+    .then(res5=>res5.json())
+    .then(res6=>{
+        // console.log(res6);
+        const vc = []
+     res6.map((res7,i)=>{
+            console.log( res7.Product_Catagories , productDetail.Product_Catagories , res7._id , productDetail._id);
+         if ( res7.Product_Catagories === data.Product_Catagories && res7._id !== data._id) {
+             //    console.log(res7);
+             //         // return setproduct1(...product1 , res3)
+             vc.push(res7)
+            //  return  res7
+            }
+        })
+        console.log(vc);
+        
+        if(vc.length >= 1 && vc.length < 5){
+           console.log("yes");
+        res6.map((res7,i)=>{
+            // console.log( res7.Product_Catagories , data.Product_Catagories , res7._id , data._id);
+         if ( res7._id !== data._id) {
+             //    console.log(res7);
+             //         // return setproduct1(...product1 , res3)
+             vc.push(res7)
+            //  return  res7
+            }
+        })
+        let db = vc.slice(0,7)
+        setallproduct(db) 
+        }
+
+        else if (vc.length >= 1 ){
+           console.log("yes");
+           let db = vc.slice(0,7)
+           console.log(db);
+        setallproduct(db)
+        }
+
+        else{
+            const vb = []
+            res6.map((res7,i)=>{
+                //    console.log(res7.Product_Popular );
+                if ( i+1 % 4 === 0) {
+                    
+                    vb.push(res7)
+                    //    console.log(res7);
+                    //         // return setproduct1(...product1 , res3)
+                    // return  res7
+                   }
+               })
+               let db = vb.slice(0,7)
+               console.log(db);
+                setallproduct(db)
+        }
+ 
+        console.log(allproduct);
+    })
+    //    },1000)
+       return () => clearInterval(Inte);
+
+    },[])
 
 const minus=()=>{
         if(Price > 1)
@@ -104,6 +259,10 @@ const addtocartproduct = () =>{
     }
 
 }
+const savethedetailproduct = (data) =>{
+    localStorage.setItem("Data" , JSON.stringify(data) )
+    console.log(data);
+ }
 
     const piece = useSelector((state) => state.piece);
     const dispatch = useDispatch();
@@ -194,7 +353,7 @@ const addtocartproduct = () =>{
                     <div className="container-fuild" style={{width : "97%"}}>
                         <div className="row justify-content-center">
                             <div className="col-md-7 site-section-heading text-center pt-4">
-                                <h2>Featured Products</h2>
+                                <h2 style={{marginLeft : "-74px"}} >Featured Products</h2>
                             </div>
                         </div>
                         <div className="row">
@@ -206,7 +365,7 @@ const addtocartproduct = () =>{
 
 
 
-                            <div className="item" style={{margin : "5px 5px"}}>
+                            {/* <div className="item" style={{margin : "5px 5px"}}>
                                         <div className="block-4
                                          text-center">
                                             <figure className="block-4-image">
@@ -234,9 +393,9 @@ const addtocartproduct = () =>{
 
                                             </div>
                                         </div>
-                                    </div>
-                                        {/* {
-                                            Homo.map((res,i)=>{
+                                    </div> */}
+                                        {
+                                            allproduct.map((res,i)=>{
                                                 var Cat = res.Product_Catagories.split(" ").join("-")
                                         
                                                 var Cat1 = res.Product_Name.split(" ").join("-")
@@ -257,7 +416,7 @@ const addtocartproduct = () =>{
                                                     </div>
                                                 )
                                             })
-                                        } */}
+                                        }
                 </Carousel>
                             </div>
                         </div>
@@ -267,7 +426,7 @@ const addtocartproduct = () =>{
 
 
 
-            <div className="site-section block-3 site-blocks-2 bg-light">
+            {/* <div className="site-section block-3 site-blocks-2 bg-light">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-7 site-section-heading text-center pt-4">
@@ -341,7 +500,7 @@ const addtocartproduct = () =>{
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

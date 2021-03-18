@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
 
 
 	var siteMenuClone = function() {
-
+console.log("wdwddwd");
 		$('<div class="site-mobile-menu"></div>').prependTo('.site-wrap');
 
 		$('<div class="site-mobile-menu-header"></div>').prependTo('.site-mobile-menu');
@@ -118,7 +118,7 @@ jQuery(document).ready(function($) {
 			}
 		}) 
 
-		// click outisde offcanvas
+		click outisde offcanvas
 		$(document).mouseup(function(e) {
 	    var container = $(".site-mobile-menu");
 	    if (!container.is(e.target) && container.has(e.target).length === 0) {
@@ -127,10 +127,19 @@ jQuery(document).ready(function($) {
 				}
 	    }
 		});
+	
 	}; 
 	siteMenuClone();
-
-
+setInterval(()=>{
+if (JSON.parse(localStorage.getItem("head"))){
+	const dat = document.getElementById("my1")
+	// dat.classList.remove("offcanvas-menu")
+	dat.remove()
+		// console.log("dwwedwdhb");
+		// 	$("body").removeClass('offcanvas-menu')
+		}
+},1000)
+	
 	var sitePlusMinus = function() {
 		$('.js-btn-minus').on('click', function(e){
 			e.preventDefault();

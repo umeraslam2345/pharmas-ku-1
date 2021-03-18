@@ -63,15 +63,16 @@ const Home = ( props ) => {
    .then(res5=>res5.json())
    .then(res6=>{
     //    console.log(res6);
-       setproduct(res6)
-       const pro = res6.map((res7,i)=>{
+    const pro = []
+    res6.map((res7,i)=>{
         //    console.log(res7.Product_Popular );
-           if ( res7.Product_Popular === "yes"){
+        // if ( res7.Product_Popular === "yes"){
             //    console.log(res7);
-    //         // return setproduct1(...product1 , res3)
-            return  res7
-           }
-       })
+            //         // return setproduct1(...product1 , res3)
+            pro.push(res7)
+        // }
+    })
+    setproduct(pro.reverse())
 
    })
     
@@ -84,37 +85,7 @@ const Home = ( props ) => {
    .then(res=>res.json())
    .then(res1=>{
     setCategories(res1)
-    
-    fetch("/AllProduct",{
-        method: "GET",
-         headers :  {
-         "Content-Type" : "application/json" , 
-     }
-    })
-    .then(res7=>res7.json())
-    .then(res8=>{
-        res8.map((res9,i)=>{
-            res1.map((res10,i)=>{
-                console.log(res9.Product_Catagories,res10.Categories);
-                if (res9.Product_Catagories === res10){
-                    setCategories1([{Product_Catagories : res9.Product_Catagories ,count : i+1}])
-            }
-        })
-        })
-        console.log(Categories1);
-     //    console.log(res6);
-    //     setproduct(res6)
-    //     const pro = res6.map((res7,i)=>{
-    //      //    console.log(res7.Product_Popular );
-    //         if ( res7.Product_Popular === "yes"){
-    //          //    console.log(res7);
-    //  //         // return setproduct1(...product1 , res3)
-    //          return  res7
-    //         }
-    //     })
- 
-    })
-    // console.log(res1);
+   
    })
 
     
@@ -230,15 +201,15 @@ const Home = ( props ) => {
                                         
                                         var Cat1 = res.Product_Name.split(" ").join("-")
                                         {/* console.log(Cat , Cat1) */}
-                                        return (<div className="item" style={{margin : "5px 5px"}} key={i}>
-                                        <div className="block-4 text-center">
+                                        return (<div className="item" style={{margin : "5px 5px" }} key={i}>
+                                        <div className="block-4 text-center" style={{margin : "10px 0px" , height : "430px"}} >
                                             <figure className="block-3-image">
-                                                <img src={res.Product_Image_Upload} alt="Image placeholder" style={{height : "210px" }}  className="img-fluid"/>
+                                                <img src={res.Product_Image_Upload} alt="Image placeholder" style={{height : "240px" }}  className="img-fluid"/>
                                             </figure>
-                                            <div className="block-4-text p-4">
+                                            <div className="block-4-text p-1">
                                                 <h3><Link to='/shop'><div href="#">{res.Product_Name}</div></Link></h3>
                                                 <p className="mb-0">{res.Product_Title}</p>
-                                                <p className="text-primary font-weight-bold">{res.Product_Price}</p>
+                                                <p className="text-primary font-weight-bold">Rs : {res.Product_Price}</p>
                                                 <Link to={"/shop/categories/"+Cat+"/"+Cat1}  onClick={()=>savethedetailproduct(res)}><div className="btn btn-sm btn-primary">View</div></Link>
 
                                             </div>
@@ -325,14 +296,14 @@ const Home = ( props ) => {
                                                 var Cat1 = res.Product_Name.split(" ").join("-")
                                                 return (
                                                      <div className="item" style={{margin : "5px 5px"}} key={i}>
-                                                        <div className="block-4 text-center">
+                                                        <div className="block-4 text-center" style={{margin : "10px 0px" , height : "430px"}} >
                                                             <figure className="block-3-image">
                                                                 <img src={res.Product_Image_Upload} alt="Image placeholder" style={{height : "210px" }}  className="img-fluid"/>
                                                             </figure>
-                                                            <div className="block-4-text p-4">
+                                                            <div className="block-4-text p-1">
                                                                 <h3><Link to='/shop'><div href="#">{res.Product_Name}</div></Link></h3>
                                                                 <p className="mb-0">{res.Product_Title}</p>
-                                                                <p className="text-primary font-weight-bold">{res.Product_Price}</p>
+                                                                <p className="text-primary font-weight-bold">Rs : {res.Product_Price}</p>
                                                                 <Link to={"/shop/categories/"+Cat+"/"+Cat1} onClick={()=>savethedetailproduct(res)}><div href="#" className="btn btn-sm btn-primary">View</div></Link>
 
                                                             </div>

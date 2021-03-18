@@ -13,10 +13,16 @@ const Header =(props)=> {
 
     const [search , setSearch] = useState("")
     const [DataPart2 , setDataPart2] = useState([])
+    const [menu1 , setmenu1] = useState(false)
+    const [adminHeader , setadminHeader] = useState(false)
     let history = useHistory();
 
 
     useEffect(() =>{
+
+        if ( JSON.parse(localStorage.getItem("Admin")) ){
+            setadminHeader(true)
+        }
         setInterval(()=>{
             var data1 =  JSON.parse(localStorage.getItem("Cart")) 
          if (data1) {
@@ -38,8 +44,31 @@ useEffect(() => {
     }
   }, [])
 
+
+const headerMenu = () =>{
+    if (!menu1){
+        localStorage.setItem("head" , JSON.stringify("1000"))
+        document.getElementById("my1").classList.remove("offcanvas-menu")
+        // const sb = document.getElementById("myDIv")
+        // sb.classList.remove("active")
+        setmenu1(true)
+    }
+    else{
+        localStorage.removeItem("head")
+        document.getElementById("my1").classList.remove("offcanvas-menu")
+        // const sb = document.getElementById("myDIv")
+        // sb.classList.add("active")
+        setmenu1(false) 
+    }
+    
+}
+
+
+
+
     const SubmitData = (e) =>{
         e.preventDefault()
+
         fetch("/SearchProduct",{
                                 method: "POST",
                                 headers :  {
@@ -90,65 +119,100 @@ useEffect(() => {
                             }) 
     }
 
+    const clickLogin = ()=>{
+        localStorage.removeItem("Admin")
+        history.push("/login-admin")
+    }
     const basket = useSelector((state) => state.basket);
         
         return (
-            <header className="site-navbar" role="banner">
+            <>
+                <header className="site-navbar" role="banner">
 
-                <div className="site-navbar-top">
-                    <div className="container">
-                        <div className="row align-items-center">
+                    <div className="site-navbar-top">
+                        <div className="container">
+                            <div className="row align-items-center">
 
 
-                            <div className="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                                <form className="site-block-top-search" onSubmit={(e)=>SubmitData(e)}>
-                                    <span className="icon icon-search2"></span>
-                                    <input type="text" value={search} onChange={(e)=>setSearch(e.target.value)} className="form-control border-0" placeholder="Search Medicines..." />
-                                </form>
-                            </div>
-
-                            <div className="col-12 mb-3 mb-md-0 col-md-4 col-lg-4 col-sm-4 order-1 order-md-2 text-center">
-                                <div className="site-logo">
-                                    <Link to="/" className="js-logo-clone"> <img src={logo} className="logo-img" alt=""/> </Link>
+                                <div className="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+                                    <form className="site-block-top-search" onSubmit={(e)=>SubmitData(e)}>
+                                        <span className="icon icon-search2"></span>
+                                        <input type="text" value={search} onChange={(e)=>setSearch(e.target.value)} className="form-control border-0" placeholder="Search Medicines..." />
+                                    </form>
                                 </div>
-                            </div>
 
-                            <div className="col-6 col-md-4 order-3 order-md-3 text-right">
-                                <div className="site-top-icons">
-                                    <ul>
-                                        {/* <li><Link to="/login/user"><span className="icon icon-person"></span></Link></li> */}
-                                        {/* <li><Link to="/favorite-product"><span className="icon icon-heart-o"></span></Link></li> */}
-                                        <li>
-                                            <Link to="/card" className="site-cart">
-                                                <span className="icon icon-shopping_cart"></span>
-                                                <span className="count">{DataPart2.length ? DataPart2.length : 0}</span>
-                                            </Link>
-                                        </li>
-                                        <li className="d-inline-block d-md-none ml-md-0"><a href="#" className="site-menu-toggle js-menu-toggle"><span className="icon-menu"></span></a></li>
-                                    </ul>
+                                <div className="col-12 mb-3 mb-md-0 col-md-4 col-lg-4 col-sm-4 order-1 order-md-2 text-center">
+                                    <div className="site-logo">
+                                        <Link to="/" className="js-logo-clone"> <img src={logo} className="logo-img" alt=""/> </Link>
+                                    </div>
                                 </div>
-                            </div>
 
+                                <div className="col-6 col-md-4 order-3 order-md-3 text-right">
+                                    <div className="site-top-icons">
+                                        <ul>
+                                            {/* <li><Link to="/login/user"><span className="icon icon-person"></span></Link></li> */}
+                                            {/* <li><Link to="/favorite-product"><span className="icon icon-heart-o"></span></Link></li> */}
+                                            <li>
+                                                <Link to="/card" className="site-cart">
+                                                    <span className="icon icon-shopping_cart"></span>
+                                                    <span className="count">{DataPart2.length ? DataPart2.length : 0}</span>
+                                                </Link>
+                                            </li>
+                                            <li className="d-inline-block ml-md-0" style={{fontSize : "20px" ,paddingLeft : "10px"}}><a onClick={()=>headerMenu()} className="nav-mobile" id="myDIv"><span className="icon-history"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <nav className="site-navigation text-right text-md-center" role="navigation">
-                    <div className="container">
-                        <ul className="site-menu js-clone-nav d-none d-md-block">
-                            <li className="active">
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/about">About</Link>
-                            </li>
-                            <li> <Link to="/shop">Shop</Link></li>
-                            <li><Link to="/checkout">Checkout</Link></li>
-                            <li> <Link to="/contact">Contact</Link></li>
+                    <nav className="site-navigation text-right text-md-center" style={{paddingRight : "-15%"}}>
+                        <div className="container">
+                        {
+                            adminHeader 
+                            ? 
+                            <ul className="site-menu js-clone-nav">
+                                <li className="active">
+                                    <Link to="/admin">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/forget-pass-admin">Forgot Password</Link>
+                                </li>
+                                <li> <Link to="/login-admin">Login</Link></li>
+                                <li><Link onClick={()=>clickLogin()}>Logout</Link></li>
+                                {/* <li> <Link to="/contact">Contact</Link></li> */}
+                            </ul>
+                            : 
+                            <ul className="site-menu js-clone-nav">
+                                <li className="active">
+                                    <Link to="/">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/about">About</Link>
+                                </li>
+                                <li> <Link to="/shop">Shop</Link></li>
+                                <li><Link to="/checkout">Checkout</Link></li>
+                                <li> <Link to="/contact">Contact</Link></li>
+                            </ul>
+                        }
                             
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+                        </div>
+                    </nav>
+                </header>
+                {/* <div className="mobile-header-1 d-md-none">
+                    <ul className="uli">
+                                <li className="active">
+                                    <Link to="/">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/about">About</Link>
+                                </li>
+                                <li> <Link to="/shop">Shop</Link></li>
+                                <li><Link to="/checkout">Checkout</Link></li>
+                                <li> <Link to="/contact">Contact</Link></li>
+                            </ul>
+                </div> */}
+            </>
         )
 }
 

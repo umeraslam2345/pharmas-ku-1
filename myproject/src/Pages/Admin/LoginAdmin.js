@@ -1,10 +1,21 @@
-import React,{useState} from 'react'
+import React,{useState ,useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+
+
+
 
 const LoginAdmin  =(props)=> {
     const [email , setemail] = useState("")
     const [pass , setpass] = useState("")
 
+
+    useEffect(() => {
+      if ( JSON.parse(localStorage.getItem("Admin")) )
+        props.history.push("/admin")
+      
+           }, [])
+  
 
 const postData = (e) =>{
     e.preventDefault()
@@ -30,13 +41,13 @@ const postData = (e) =>{
       .then((res)=>res.json())
       .then((res2)  =>{
           console.log(res2)
-          if (res2){
+          if (res2 !== null && !res2.Error  ){
             swal("SucessFully Login"  )
-            localStorage.setItem("Admin" , JSON.stringify({email , pass}) )
+            localStorage.setItem("Admin" , JSON.stringify("Yes") )
                 props.history.push("/admin")
           }
           else{
-            swal("Try Again !"  )
+            swal("Email & Password are Incorrect Plz Try Again !"  )
           }
         // console.log(res2)
       })
@@ -66,7 +77,7 @@ const postData = (e) =>{
 
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot <Link to="/forget-pass-admin">password?</Link>
                 </p>
             </form>
         </div>

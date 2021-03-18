@@ -51,17 +51,18 @@ const Checkout = (props) => {
   },[])
   
 
-  useEffect(() => {
+//   useEffect(() => {
   
-    return () => {
-        localStorage.removeItem("doctor")
-    }
-  }, [])
+//     return () => {
+//         localStorage.removeItem("doctor")
+//     }
+//   }, [])
 
 
     const SubmitDataMessage = (e) =>{
-
         e.preventDefault()
+        console.log(cart)
+if (cart.length  >= 1 ){
         console.log("wddde");
         const data = new FormData()
             data.append("file", Product_Image_Upload)
@@ -103,6 +104,9 @@ const Checkout = (props) => {
                         swal("Successfully Submit your Order!");
                         localStorage.removeItem("Cart")
                         localStorage.removeItem("doctor")
+                        localStorage.removeItem("SearchData")
+                        localStorage.removeItem("Data")
+                        localStorage.removeItem("CartPrice")
                         props.history.push(`/thankyou`)
 
                      }
@@ -116,6 +120,11 @@ const Checkout = (props) => {
             .catch(err=>{
                     swal("There is an Error Try Again !");
                     })   
+}
+else{
+    swal("No Product In Cart !");
+}
+       
     }
         return (
             <div>
@@ -208,7 +217,7 @@ const Checkout = (props) => {
 
                                     <div className="form-group">
                                         <label htmlFor="c_order_notes" className="text-black">Order Notes</label>
-                                        <textarea name="c_order_notes"required value={Order_Notes} onChange={(e)=>setOrder_Notes(e.target.value)} id="c_order_notes" cols="30" rows="5" className="form-control" placeholder="Write your notes here..."></textarea>
+                                        <textarea name="c_order_notes" required value={Order_Notes} onChange={(e)=>setOrder_Notes(e.target.value)} id="c_order_notes" cols="30" rows="5" className="form-control" placeholder="Write your notes here..."></textarea>
                                     </div>
 
                                     {
@@ -218,7 +227,7 @@ const Checkout = (props) => {
                                             <p>buy those Medicines which have require to upload the file !</p>
                                         </div>
                                         <div className="col-md-8 mb-3 mb-md-0">
-                                            <input type="file"  onChange={(e)=>setProduct_Image_Upload(e.target.files[0])} className="form-control py-3" id="coupon" placeholder="Coupon Code" />
+                                            <input type="file" required onChange={(e)=>setProduct_Image_Upload(e.target.files[0])} className="form-control py-3" id="coupon" placeholder="Coupon Code" />
                                         </div>
                                     </div> : ""
                                     }

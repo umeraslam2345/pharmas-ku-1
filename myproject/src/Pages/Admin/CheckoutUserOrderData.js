@@ -12,7 +12,8 @@ const CheckoutUserOrderData = (props) => {
     const [text , settext] = useState("")
     const [subject , setsubject] = useState("")
     useEffect(() =>{
-  
+        if ( JSON.parse(localStorage.getItem("Admin")) ){
+
      const lasturl = props.match.url.split("/")[2]
      console.log(lasturl)
         fetch("/AllUserCheckoutData",{
@@ -31,6 +32,10 @@ const CheckoutUserOrderData = (props) => {
           setemail(res12[0].Email)
           console.log(res12[0].Order)
         })
+    }
+    else{
+      props.history.push("/login-admin")
+    }
      },[])
 
 
