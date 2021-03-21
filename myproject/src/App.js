@@ -24,7 +24,7 @@ import LoginAdmin from './Pages/Admin/LoginAdmin';
 import forgetPass from './Pages/Admin/forgetPass';
 import Signup from './Pages/Admin/Signup';
 import AllUser from './Pages/Admin/AllUser';
-
+import EditCard from "./Pages/EditCart"
 
 
 function App() {
@@ -55,6 +55,7 @@ function App() {
           <Route exact path='/shop/search/product-item' component={SearchData} />
           {/* <Route exact path='/detail' component={Detail} /> */}
           <Route exact path='/card' component={Card} />
+          <Route exact path='/edit-card/:productId' component={EditCard} />
           <Route exact path='/checkout' component={Checkout} />
           <Route exact path='/thankyou' component={Thankyou} />
         </Switch>

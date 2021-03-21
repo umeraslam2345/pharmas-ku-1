@@ -302,8 +302,9 @@ a {
           color: #25262a;
           font-size: 10px;
           font-weight: bold;
-           }
+        }
         .site-navigation  {
+          margin-left : -60px !important;
           padding-right:  60px !important;
            }
       }

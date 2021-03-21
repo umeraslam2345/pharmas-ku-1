@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 
 import { Link } from 'react-router-dom';
 
-const Card = ()=> {
+const Card = (props)=> {
     const [price , setPrice] = useState(1)
     const [cart , setCart] = useState([])
     const [total , settotal] = useState(0)
@@ -107,8 +107,18 @@ const Card = ()=> {
     
   }
 
+
+
+
+
+
+
+
+
+
+  
   const EditCart = (id) =>{
-    
+    props.history.push("/edit-card/"+id)
     
   }
    
