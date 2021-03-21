@@ -20,14 +20,15 @@ const LoginAdmin  =(props)=> {
 const postData = (e) =>{
     e.preventDefault()
     if(email.length === 0){
-        if (email === "projectpharma874@gmail.com")
+        // if (email === "projectpharma874@gmail.com")
         swal("Enter The Correct Email !" )
-           return
+          //  return
         }
-     if(pass.length === 0){
+    if(pass.length === 0){
         swal("Enter The Password !"  )
            return
          }
+    if (email === "projectpharma874@gmail.com"){
       fetch("/logIn",{
         method: 'POST' , 
         headers :  {
@@ -52,6 +53,33 @@ const postData = (e) =>{
         // console.log(res2)
       })
       .catch((err)=>console.log(err))
+    }
+    else{
+      fetch("/logIn-user",{
+        method: 'POST' , 
+        headers :  {
+          "Content-Type" : "application/json" , 
+        } , 
+        body : JSON.stringify({
+          email  ,
+          pass  ,
+        })
+      })
+      .then((res)=>res.json())
+      .then((res2)  =>{
+          console.log(res2)
+          if (res2 !== null && !res2.Error  ){
+            swal("SucessFully Login"  )
+            localStorage.setItem("User" , JSON.stringify(res2) )
+                props.history.push("/")
+          }
+          else{
+            swal("Email & Password are Incorrect Plz Try Again !"  )
+          }
+        // console.log(res2)
+      })
+      .catch((err)=>console.log(err))
+    }
 
 }
 
@@ -60,7 +88,7 @@ const postData = (e) =>{
 
 
     return (
-        <div className="container" style={{width : "40%" , margin : "50px auto"}}>
+        <div className="container-fuild" style={{width : "40%" , margin : "50px auto"}}>
             <form  onSubmit={(e)=>postData(e)}>
                 <h3>Sign In</h3>
 
@@ -78,6 +106,9 @@ const postData = (e) =>{
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>
                 <p className="forgot-password text-right">
                     Forgot <Link to="/forget-pass-admin">password?</Link>
+                </p>
+                <p className=" text-center">
+                    <Link to="/signup-user">Create an Account </Link>
                 </p>
             </form>
         </div>

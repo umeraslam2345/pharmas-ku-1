@@ -87,7 +87,69 @@ app.post("/logIn" ,(req, res) => {
 })
 
 
+app.post("/logIn-user" ,(req, res) => {
+    // console.log(req.body);
+    const { email , pass  } = req.body;
+    if(email , pass ){
+            
+        AdminLogin.findOne({email,pass})
+        .then((res2)=>{
+            console.log(res2);
+            // if (res2.email === email && res2.pass === pass)
+            if (res2)
+            res.send(res2)
+            else
+            res.send({ Error : "Password are Incorrect"})
+        })
+}
+    else res.send({ Error : "Field Are Required"})
+})
+
+app.post("/signup-user-1" ,(req, res) => {
+    // console.log(req.body);
+    const { email , pass , user } = req.body;
+    if(email , pass , user ){
+        const AdminLogin1 = new AdminLogin({
+            email , 
+            pass , 
+            user 
+            })
+            AdminLogin1.save().then((res2) =>{
+                    res.send(res2)
+            })
+// if (res2)
+            // res.send(res2)
+            // else
+            // res.send({ Error : "Password are Incorrect"})
+}
+    else res.send({ Error : "Field Are Required"})
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post("/logIn-send-code" ,(req, res) => {
+
+
+
+    if (req.body.email === "projectpharma874@gmail.com"){
+
+    
     const Ma = Math.floor(Math.random()*2093980)
     console.log(Ma)
 
@@ -115,7 +177,37 @@ app.post("/logIn-send-code" ,(req, res) => {
         else res.send({Ma})
     })
     
+    }
+else{
+    AdminLogin.findOne({email :  req.body.email})
+    .then((res2)=>{
+        console.log(res2,"res2" ,req.body);
+        if (res2){
 
+            const Ma = Math.floor(Math.random()*2093980)
+            
+            let transporter = nodemailer.createTransport({
+                service : "gmail" ,
+                auth : {
+                    user : "projectpharma874@gmail.com" ,
+                    pass : "projectpharma12345"
+                }
+            })
+            let mailOption = {
+                from : "projectpharma874@gmail.com",
+                to : res2.email ,
+                subject : "COde" ,
+                text : " "+Ma + " "
+            }
+            transporter.sendMail(mailOption , function (err, data){
+                if (err) console.log(err);
+                else res.send({Ma})
+            })
+        }
+        else
+        res.send({ Error : "Email are Incorrect"})
+    })
+}
 })
 
 
@@ -128,13 +220,68 @@ app.post("/logIn-send-code" ,(req, res) => {
 
 app.post("/logIn-new-pass" ,(req, res) => {
     console.log(req.body);
-    const {  pass } = req.body;
-    AdminLogin.findOne({})
+    const {  pass ,email} = req.body;
+    AdminLogin.findOne({email})
     .then((res2)=>{
         console.log(res2)
         var myquery = { pass: res2.pass };
         var newvalues = { $set: {pass} };
         AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
+            console.log(res1);
+            if (err)  res.json({message : " Error"});
+            else res.json({message : " Successfully Save"})
+        });
+        });
+    
+    })
+
+
+
+app.post("/user-cart-add" ,(req, res) => {
+    console.log(req.body);
+    const {  cart , user} = req.body;
+    AdminLogin.findOne({_id : user._id})
+    .then((res2)=>{
+        console.log(res2)
+        var myquery = { cart: res2.cart };
+        var newvalues = { $set: {cart} };
+        AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
+            console.log(res1);
+            if (err)  res.json({message : " Error"});
+            else res.json({message : " Successfully Save"})
+        });
+        });
+    
+    })
+
+
+app.post("/user-cart-order" ,(req, res) => {
+    console.log(req.body);
+    const {  Order , user} = req.body;
+    AdminLogin.findOne({_id : user._id})
+    .then((res2)=>{
+        console.log(res2)
+        var myquery = { Order: res2.Order };
+        var newvalues = { $set: {Order} };
+        AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
+            console.log(res1);
+            if (err)  res.json({message : " Error"});
+            else res.json({message : " Successfully Save"})
+        });
+        });
+    
+    })
+
+app.post("/user-cart-detail" ,(req, res) => {
+    console.log(req.body);
+    const {  Details , user} = req.body;
+    AdminLogin.findOne({_id : user._id})
+    .then((res2)=>{
+        console.log(res2)
+        var myquery = { Order: res2.Details };
+        var newvalues = { $set: {Details} };
+        AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
+            console.log(res1);
             if (err)  res.json({message : " Error"});
             else res.json({message : " Successfully Save"})
         });
@@ -297,85 +444,6 @@ app.post("/AdminCreateProduct" ,(req, res) => {
             }
     else res.json({ Error : "Field Are Required"})
 })
-
-
-
-
-
-
-
-
-
-
-
-
-// app.put("/AdminCreateProductCategories" ,(req, res) => {
-//     console.log(req.body);
-//                             const { Categories ,
-//                                      } 
-//                                     = req.body;
-
-//     if( Categories  ){
-//            console.log(Categories); 
-        
-//                     ProductCatogories.findOne({Categories :Product_Catagories })
-//                     .then((res2)=>{
-//                         console.log(res2);
-//                     if (res2) {
-//                         coun = res2.count
-//                         ProductCatogories.findByIdAndUpdate(res2._id , {
-//                                 $push : {count : coun + 1}
-//                             },{
-//                                 new : true
-//                             },(err, user) => {
-//                                 if(err){
-//                                     return res.json({Error : "User Not Found"})
-//                                 }
-//                                 res.send(user)
-                                
-//                             })
-
-
-                       
-//                         }else{
-                            
-//  const CreateProductCatogories = new ProductCatogories({
-//                             Categories  : Product_Catagories,
-//                             count : 1
-//                                 })
-//                                 CreateProductCatogories.save()
-//                                 .then((res3) =>{
-//                                     res.send({res3,res4})
-//                                 })
-//                                 .catch((err) =>{
-//                                     res.json({Error : "There Is An Error"})
-//                                 })
-
-
-
-
-
-
-
-
-
-
-
-
-//                         }
-//                     })
-                    
-//                 .catch((err) =>{
-//                     res.json({Error : "There Is An Error"})
-//                 })
-
-
-              
-  
-                
-//             }
-//     else res.json({ Error : "Field Are Required"})
-// })
 
 
 

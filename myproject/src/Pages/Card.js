@@ -72,7 +72,20 @@ const Card = ()=> {
         return res._id !== id
     })
     localStorage.setItem("Cart" ,JSON.stringify(data1))
-
+    fetch("/user-cart-add",{
+        method: "POST",
+        headers :  {
+            "Content-Type" : "application/json" , 
+        } ,
+        body : JSON.stringify({
+            cart : data1 ,
+            user : JSON.parse(localStorage.getItem("User")) 
+        })
+    })
+    .then(res=>res.json())
+    .then((res1)=>{ 
+        console.log(res1);
+    })
         var j = 0
     data1.map((res,i)=>{
         // if (res._id === id)

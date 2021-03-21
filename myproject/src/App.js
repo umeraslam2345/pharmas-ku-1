@@ -22,6 +22,7 @@ import SearchData from './Pages/SearchData';
 import CheckoutUserOrderData from './Pages/Admin/CheckoutUserOrderData';
 import LoginAdmin from './Pages/Admin/LoginAdmin';
 import forgetPass from './Pages/Admin/forgetPass';
+import Signup from './Pages/Admin/Signup';
 
 function App() {
   return (
@@ -34,7 +35,8 @@ function App() {
           <Route exact path='/' component={Home} />
           {/* <Route exact path='/Header12345678' component={Header} /> */}
           <Route exact path='/admin' component={Admin} />
-          <Route exact path='/login-admin' component={LoginAdmin} />
+          <Route exact path='/login' component={LoginAdmin} />
+          <Route exact path='/signup-user' component={Signup} />
           <Route exact path='/forget-pass-admin' component={forgetPass} />
           <Route exact path='/createProduct' component={createProduct} />
           <Route exact path='/allproduct' component={AllProduct} />

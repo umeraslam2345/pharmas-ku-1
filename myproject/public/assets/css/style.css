@@ -879,9 +879,41 @@ a {
 }
 
 
+.pop-up-1{
+    background : black ;
+    color : white ;
+    width : 500px;
+    padding : 5px 10px ;
+    border-radius : 10px ;
+    margin :  5px ;
+    position : absolute ;
+    top : 60%;
+    left : 32% ;
+    z-index : 99999 ;
+    visibility: hidden;
+    opacity: 0.4;
+}
 
 
 
 
+@media  (max-width: 500px) {
 
+  .pop-up-1{
+    background : black ;
+    color : white ;
+    width : 300px;
+    padding : 5px 10px ;
+    border-radius : 10px ;
+    margin :  5px ;
+    position : absolute ;
+    top : 60% !important;
+    left : 15% !important;
+    /* top : 60%; */
+    /* left : 32% ; */
+    z-index : 99999 ;
+    visibility: hidden;
+    opacity: 0.7;
+}
 
+}

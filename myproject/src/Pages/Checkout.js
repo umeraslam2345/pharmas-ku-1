@@ -62,7 +62,8 @@ const Checkout = (props) => {
     const SubmitDataMessage = (e) =>{
         e.preventDefault()
         console.log(cart)
-if (cart.length  >= 1 ){
+        if ( JSON.parse(localStorage.getItem("User"))  ){
+            if (cart.length  >= 1 ){
         console.log("wddde");
         const data = new FormData()
             data.append("file", Product_Image_Upload)
@@ -102,6 +103,59 @@ if (cart.length  >= 1 ){
                      }
                      else{
                         swal("Successfully Submit your Order!");
+                        fetch("/user-cart-order",{
+                            method: "POST",
+                            headers :  {
+                                "Content-Type" : "application/json" , 
+                            } ,
+                            body : JSON.stringify({
+                                Order : cart ,
+                                user : JSON.parse(localStorage.getItem("User")) 
+                            })
+                        })
+                        .then(res=>res.json())
+                        .then((res1)=>{ 
+                            console.log(res1);
+                        })
+                        fetch("/user-cart-detail",{
+                            method: "POST",
+                            headers :  {
+                                "Content-Type" : "application/json" , 
+                            } ,
+                            body : JSON.stringify({
+                                Details : {
+                                    fname,
+                                    Lname ,
+                                    CName, 
+                                    Address ,
+                                    Address1 ,
+                                    StateCountry  ,
+                                    ZipPostal ,
+                                    Email ,
+                                    Phone ,
+                                    Order_Notes,
+                                    Select_Country,
+                                    DoctorPrescipsion : res1.url ,
+                                },
+                                user : JSON.parse(localStorage.getItem("User")) 
+                            })
+                        })
+                        .then(res6=>res6.json())
+                        .then((res7)=>{ 
+                            console.log(res7);
+                        })
+
+                            setfName ("")
+                            setLName ("" )
+                            setCName ("")
+                            setAddress  ("")
+                            setAddress1 ("" )
+                            setStateCountry  ("" )
+                            setZipPostal ("" )
+                            setEmail ("" )
+                            setPhone ("" )
+                            setOrder_Notes ("")
+                            setSelect_Country ("")
                         localStorage.removeItem("Cart")
                         localStorage.removeItem("doctor")
                         localStorage.removeItem("SearchData")
@@ -124,6 +178,11 @@ if (cart.length  >= 1 ){
 else{
     swal("No Product In Cart !");
 }
+        }
+else{
+    swal("Plz SignIn First !");
+    props.history.push(`/login`)
+}
        
     }
         return (
@@ -139,11 +198,11 @@ else{
                 <div className="site-section">
                     <div className="container">
                         <div className="row mb-5">
-                            {/* <div className="col-md-12">
+                            <div className="col-md-12">
                                 <div className="border p-4 rounded" role="alert">
-                                    Returning customer? <a href="#">Click here</a> to login
+                                    Returning customer? <Link to="/login">Click here</Link> to login
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                         <div className="row">
                             <div className="col-md-6 mb-5 mb-md-0">

@@ -19,7 +19,7 @@ export default class createProduct extends Component {
 
     componentDidMount(){
         if (! JSON.parse(localStorage.getItem("Admin")) ){
-            this.props.history.push("/login-admin")
+            this.props.history.push("/login")
         }
     }
 
@@ -68,6 +68,17 @@ export default class createProduct extends Component {
                                 }
                                 else{
                                         swal("Successfully Upload your Product!");
+                                        this.setState({ Product_Name : "",
+                                        Product_Title : "",
+                                        Product_Price: "" ,
+                                        Product_Catagories: "",
+                                        Product_Image_Upload : "",
+                                        doctor_prescription : "",
+                                        Product_Short_Notes : "",
+                                        Product_Long_Notes : "",
+                                        Product_Popular : "",
+                                        url : ""})
+                                        this.fileInput.value = ""
                                 }
                             })
                             .catch(err=>{
@@ -84,18 +95,6 @@ export default class createProduct extends Component {
 
     render() {
 
-        // const [Product_Name , setProduct_Name] = useState("")
-        // const [Product_Title , setProduct_Title] = useState("")
-        // const [Product_Price , setProduct_Price] = useState("")
-        // const [Product_Catagories , setProduct_Catagories] = useState("")
-        // const [Product_Image_Upload , setProduct_Image_Upload] = useState("")
-        // const [doctor_prescription , setDoctor_prescription] = useState("")
-        // const [Product_Short_Notes , setProduct_Short_Notes] = useState("")
-        // const [Product_Long_Notes , setProduct_Long_Notes] = useState("")
-        // const [Product_Popular , setProduct_Popular] = useState("")
-        // const [url , setUrl] = useState("")
-
-        
 
 
 
@@ -131,7 +130,14 @@ export default class createProduct extends Component {
                                 </div>
                                 <div className="form-group  col-md-6">
                                     <label for="inputAddress">Product Catagories</label>
-                                    <input type="text" value={this.state.Product_Catagories} onChange={(e)=>this.setState({Product_Catagories:e.target.value})}  className="form-control" id="inputAddress" placeholder="Enter Correct Catagories Name"/>
+                                    <select id="c_country" className="form-control" value={this.state.Product_Catagories} onChange={(e)=>this.setState({Product_Catagories:e.target.value})} >
+                                            <option value="1">Select a Catagories</option>
+                                            <option value="Homeopathic & Herbal">Homeopathic & Herbal</option>
+                                            <option value="Allopathic">Allopathic</option>
+                                            <option value="General">General</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                    {/* <input type="text" className="form-control" id="inputAddress" placeholder="Enter Correct Catagories Name"/> */}
                                 </div>
                             </div>
                             <div className="form-row">
@@ -147,7 +153,7 @@ export default class createProduct extends Component {
                             <div className="form-row">
                                 <div className="form-group col-md-6">
                                     <label for="inputAddress2">Product Image Upload</label>
-                                    <input type="file" onChange={(e)=>this.setState({Product_Image_Upload:e.target.files[0]})} className="form-control" id="inputAddress2" placeholder="Upload Image"/>
+                                    <input type="file" onChange={(e)=>this.setState({Product_Image_Upload:e.target.files[0]})}  ref={ref=> this.fileInput = ref}  className="form-control" id="inputAddress2" placeholder="Upload Image"/>
                                 </div>
                                 <div className="form-group  col-md-6">
                                         <label for="inputAddress">User Can attach the doctor prescription</label>

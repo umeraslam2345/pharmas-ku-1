@@ -13,6 +13,8 @@ const Header =(props)=> {
 
     const [search , setSearch] = useState("")
     const [DataPart2 , setDataPart2] = useState([])
+    const [UserDatat , setUserDatat] = useState({})
+    const [userHeader , setuserHeader] = useState(false)
     const [menu1 , setmenu1] = useState(false)
     const [adminHeader , setadminHeader] = useState(false)
     let history = useHistory();
@@ -23,6 +25,10 @@ const Header =(props)=> {
         if ( JSON.parse(localStorage.getItem("Admin")) ){
             setadminHeader(true)
         }
+        if ( JSON.parse(localStorage.getItem("User"))  ){
+            setuserHeader(true)
+            setUserDatat(JSON.parse(localStorage.getItem("User")))
+        }
         setInterval(()=>{
             var data1 =  JSON.parse(localStorage.getItem("Cart")) 
          if (data1) {
@@ -31,6 +37,12 @@ const Header =(props)=> {
             //  setDataPart2(data)
             }
          else setDataPart2(0)
+         if ( JSON.parse(localStorage.getItem("Admin")) ){
+            setadminHeader(true)
+        }
+        if ( JSON.parse(localStorage.getItem("User")) ||  JSON.parse(localStorage.getItem("Admin")) ){
+            setuserHeader(true)
+        }
         },3000)
         
   },[])
@@ -121,7 +133,8 @@ const headerMenu = () =>{
 
     const clickLogin = ()=>{
         localStorage.removeItem("Admin")
-        history.push("/login-admin")
+        localStorage.removeItem("User")
+        history.push("/login")
     }
     const basket = useSelector((state) => state.basket);
         
@@ -150,7 +163,6 @@ const headerMenu = () =>{
                                 <div className="col-6 col-md-4 order-3 order-md-3 text-right">
                                     <div className="site-top-icons">
                                         <ul>
-                                            {/* <li><Link to="/login/user"><span className="icon icon-person"></span></Link></li> */}
                                             {/* <li><Link to="/favorite-product"><span className="icon icon-heart-o"></span></Link></li> */}
                                             <li>
                                                 <Link to="/card" className="site-cart">
@@ -158,7 +170,12 @@ const headerMenu = () =>{
                                                     <span className="count">{DataPart2.length ? DataPart2.length : 0}</span>
                                                 </Link>
                                             </li>
-                                            <li className="d-inline-block ml-md-0" style={{fontSize : "20px" ,paddingLeft : "10px"}}><a onClick={()=>headerMenu()} className="nav-mobile" id="myDIv"><span className="icon-history"></span></a></li>
+                                            {!userHeader ?
+                                            <li><Link to="/login"><span className="icon icon-person"  style={{ fontSize : "23px"}} ></span></Link></li>
+                                            :
+                                            <li><p onClick={()=>clickLogin()}><span class="iconify" style={{marginTop :  "-15px" , fontSize : "19px"}} data-icon="ls:logout" data-inline="false"></span></p></li>
+                                            }
+                                            {/* <li className="d-inline-block ml-md-0" style={{fontSize : "20px" ,paddingLeft : "10px"}}><a onClick={()=>headerMenu()} className="nav-mobile" id="myDIv"><span className="icon-history"></span></a></li> */}
                                         </ul>
                                     </div>
                                 </div>
@@ -183,6 +200,11 @@ const headerMenu = () =>{
                                 {/* <li> <Link to="/contact">Contact</Link></li> */}
                             </ul>
                             : 
+                            <>
+                            {UserDatat && userHeader  ?
+                            <center> <p>Welcome <b>{UserDatat.user }</b> </p></center>
+                                : ""
+                            }
                             <ul className="site-menu js-clone-nav">
                                 <li className="active">
                                     <Link to="/">Home</Link>
@@ -194,11 +216,15 @@ const headerMenu = () =>{
                                 <li><Link to="/checkout">Checkout</Link></li>
                                 <li> <Link to="/contact">Contact</Link></li>
                             </ul>
+                            </>
                         }
                             
                         </div>
                     </nav>
                 </header>
+                {/* <div>
+                    h1
+                </div> */}
                 {/* <div className="mobile-header-1 d-md-none">
                     <ul className="uli">
                                 <li className="active">

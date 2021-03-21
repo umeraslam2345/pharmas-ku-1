@@ -34,7 +34,7 @@ const CheckoutUserOrderData = (props) => {
         })
     }
     else{
-      props.history.push("/login-admin")
+      props.history.push("/login")
     }
      },[])
 

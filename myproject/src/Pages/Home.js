@@ -51,9 +51,32 @@ const Home = ( props ) => {
     const [Homo , setHomo] = useState([])
     const [product , setproduct] = useState([])
     const [product1 , setproduct1] = useState([])
-
+    const [UserDatat , setUserDatat] = useState({})
+    const [userHeader , setuserHeader] = useState(false)
     useEffect(() =>{
-  
+        if ( JSON.parse(localStorage.getItem("User"))  ){
+            setuserHeader(true)
+            setUserDatat(JSON.parse(localStorage.getItem("User")))
+            const cartUser1 = JSON.parse(localStorage.getItem("Cart"))
+            if (cartUser1 ){
+        fetch("/user-cart-add",{
+                                method: "POST",
+                                headers :  {
+                                    "Content-Type" : "application/json" , 
+                                } ,
+                                body : JSON.stringify({
+                                    cart : cartUser1 ,
+                                    user : JSON.parse(localStorage.getItem("User")) 
+                                })
+                            })
+                            .then(res=>res.json())
+                            .then((res1)=>{ 
+                                console.log(res1);
+                            })
+
+            }
+        }
+
         fetch("/AllProduct",{
        method: "GET",
         headers :  {

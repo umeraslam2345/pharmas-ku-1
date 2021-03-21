@@ -65,11 +65,11 @@ export default class forgetPass extends Component {
      postData1 = (e) =>{
         e.preventDefault()
         if(this.state.email.length === 0){
-            if (this.state.email === "projectpharma874@gmail.com")
+            // if (this.state.email === "projectpharma874@gmail.com")
             swal("Enter The Correct Email !" )
                return
             }
-
+            
           fetch("/logIn-send-code",{
             method: 'POST' , 
             headers :  {
@@ -82,7 +82,7 @@ export default class forgetPass extends Component {
           })
           .then((res)=>res.json())
           .then((res2)  =>{
-            //   console.log(res2)
+              console.log(res2)
 
               if (res2.Ma){
                   this.setState({dis1 : true , Code1 : res2.Ma})
@@ -125,7 +125,7 @@ export default class forgetPass extends Component {
             } , 
             body : JSON.stringify({
               pass :this.state.pass ,
-            //   pass :this.state.pass ,
+              email :this.state.email ,
             })
           })
           .then((res)=>res.json())
@@ -136,7 +136,7 @@ export default class forgetPass extends Component {
                 //   this.setState({dis1 : true , Code1 : res2.Ma})
                 swal("SucessFully Updated"  )
             //     localStorage.setItem("Admin" , JSON.stringify("Yes") )
-                    this.props.history.push("/login-admin")
+                    this.props.history.push("/login")
               }
               else{
                 swal("Email & Password are Incorrect Plz Try Again !"  )
@@ -159,7 +159,7 @@ export default class forgetPass extends Component {
 
         return (
             <div>
-                   <div className="container" style={{width : "40%" , margin : "50px auto"}}>
+                   <div className="container-fuild" style={{width : "40%" , margin : "50px auto"}}>
                    {!this.state.dis1 ?
 
                 <form  onSubmit={(e)=>this.postData1(e)}>

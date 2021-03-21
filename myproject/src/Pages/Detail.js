@@ -213,7 +213,11 @@ const minus=()=>{
     }
 const addtocartproduct = () =>{
     if(productDetail){
-        
+        document.getElementById("myDi").style.visibility = "visible"
+        setTimeout(()=>{
+            document.getElementById("myDi").style.visibility = "hidden"
+
+        },2000)
         const data =  {...productDetail ,
                          price : Price ,
                          Product_Price  : productDetail.Product_Price * Price }
@@ -241,16 +245,61 @@ const addtocartproduct = () =>{
                 console.log("double remove");
                 localStorage.removeItem("double")
                 localStorage.setItem("Cart" , JSON.stringify(data3) )
+                fetch("/user-cart-add",{
+                                method: "POST",
+                                headers :  {
+                                    "Content-Type" : "application/json" , 
+                                } ,
+                                body : JSON.stringify({
+                                    cart : data3 ,
+                                    user : JSON.parse(localStorage.getItem("User")) 
+                                })
+                            })
+                            .then(res=>res.json())
+                            .then((res1)=>{ 
+                                console.log(res1);
+                            })
+
             }
             else{
                 console.log("Differet");
                 var data2 = [...data1 , data]
+                fetch("/user-cart-add",{
+                                method: "POST",
+                                headers :  {
+                                    "Content-Type" : "application/json" , 
+                                } ,
+                                body : JSON.stringify({
+                                    cart : data2 ,
+                                    user : JSON.parse(localStorage.getItem("User")) 
+                                })
+                            })
+                            .then(res=>res.json())
+                            .then((res1)=>{ 
+                                console.log(res1);
+                            })
+
            localStorage.setItem("Cart" , JSON.stringify(data2) )
             }
         }
         else{
             console.log("1");
             localStorage.setItem("Cart" , JSON.stringify([data]) )
+            fetch("/user-cart-add",{
+                                method: "POST",
+                                headers :  {
+                                    "Content-Type" : "application/json" , 
+                                } ,
+                                body : JSON.stringify({
+                                    cart : data ,
+                                    user : JSON.parse(localStorage.getItem("User")) 
+                                })
+                            })
+                            .then(res=>res.json())
+                            .then((res1)=>{ 
+                                console.log(res1);
+                            })
+
         }
         // setTimeout(()=>{
             // props.history.push("/card")
@@ -267,6 +316,13 @@ const savethedetailproduct = (data) =>{
     const piece = useSelector((state) => state.piece);
     const dispatch = useDispatch();
     return (
+        <>
+        <center>
+            <div className="pop-up-1 dis-off" id="myDi">
+                <h1>Product Updated in Cart</h1>
+            </div> 
+        </center>
+        
         <div>
             <div className="bg-light py-3">
                 <div className="container">
@@ -502,6 +558,7 @@ const savethedetailproduct = (data) =>{
                 </div>
             </div> */}
         </div>
+        </>
     )
 }
 
