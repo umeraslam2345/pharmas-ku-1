@@ -24,12 +24,38 @@ const Header =(props)=> {
 
         if ( JSON.parse(localStorage.getItem("Admin")) ){
             setadminHeader(true)
+            setuserHeader(false)
+            setUserDatat([])
         }
-        if ( JSON.parse(localStorage.getItem("User"))  ){
+        else if ( JSON.parse(localStorage.getItem("User"))  ){
             setuserHeader(true)
+            setadminHeader(false)
             setUserDatat(JSON.parse(localStorage.getItem("User")))
         }
-        setInterval(()=>{
+        else{
+            setadminHeader(false)
+            setUserDatat([])
+            setuserHeader(false)
+
+        }
+        const inter = setInterval(()=>{
+            if ( JSON.parse(localStorage.getItem("Admin")) ){
+            setadminHeader(true)
+            setuserHeader(false)
+            setUserDatat([])
+        }
+        else if ( JSON.parse(localStorage.getItem("User"))  ){
+            setuserHeader(true)
+            setadminHeader(false)
+            setUserDatat(JSON.parse(localStorage.getItem("User")))
+        }
+        else{
+            setadminHeader(false)
+            setUserDatat([])
+            setuserHeader(false)
+
+        }
+
             var data1 =  JSON.parse(localStorage.getItem("Cart")) 
          if (data1) {
              setDataPart2(data1)
@@ -44,17 +70,11 @@ const Header =(props)=> {
             setuserHeader(true)
         }
         },3000)
-        
+        return () => clearInterval(inter);
+
   },[])
   
 
-
-useEffect(() => {
-  
-    return () => {
-        clearInterval()
-    }
-  }, [])
 
 
 const headerMenu = () =>{
@@ -134,6 +154,8 @@ const headerMenu = () =>{
     const clickLogin = ()=>{
         localStorage.removeItem("Admin")
         localStorage.removeItem("User")
+        localStorage.removeItem("Cart")
+        
         history.push("/login")
     }
     const basket = useSelector((state) => state.basket);

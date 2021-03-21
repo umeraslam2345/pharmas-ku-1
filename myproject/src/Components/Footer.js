@@ -68,7 +68,7 @@ class Footer extends Component {
                     <div className="row pt-5 mt-5 text-center">
                         <div className="col-md-12">
                             <p>
-                                Copyright All rights reserved |  Powered by  <i className="icon-heart" aria-hidden="true"></i> by <a href="https://facebook.com/webodesigns" target="_blank" className="text-primary">Webo Designs</a>
+                                Copyright All rights reserved 
 
                             </p>
                         </div>
