@@ -39,6 +39,8 @@ export function Detail(props) {
 
 
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
       const Inte = setInterval(()=>{
 
       var data =  JSON.parse(localStorage.getItem("Data")) 

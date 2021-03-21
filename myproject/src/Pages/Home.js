@@ -54,6 +54,13 @@ const Home = ( props ) => {
     const [UserDatat , setUserDatat] = useState({})
     const [userHeader , setuserHeader] = useState(false)
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
+        localStorage.removeItem("SearchData")
+        localStorage.removeItem("Data")
+        localStorage.removeItem("CartPrice")
+        localStorage.removeItem("CateProduct")
+
         if ( JSON.parse(localStorage.getItem("User"))  ){
             setuserHeader(true)
             setUserDatat(JSON.parse(localStorage.getItem("User")))

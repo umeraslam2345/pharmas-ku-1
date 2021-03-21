@@ -14,6 +14,8 @@ const Card = ()=> {
 
 
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
        const Inter = setInterval(()=>{
             let data =  JSON.parse(localStorage.getItem("Cart")) 
             if(data)

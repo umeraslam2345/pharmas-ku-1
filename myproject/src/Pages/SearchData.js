@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-
+import categ from '../assets/images/cate.jpeg';
 import women from '../assets/images/women.jpg';
 
 const SearchData = (props) =>{
@@ -16,6 +16,8 @@ const SearchData = (props) =>{
 
 
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
         var data2 = JSON.parse(localStorage.getItem("SearchData")) 
         
             setProduct(data2)
@@ -332,7 +334,7 @@ const cate =(Categories) =>{
                                                 <div className="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" style={{margin: "10px 0px"}} data-aos="fade" data-aos-delay="">
                                                     <Link className="block-2-item"  onClick={()=>cate(res.Categories)} >
                                                         <figure className="image">
-                                                            <img src={women} alt="" className="img-fluid" />
+                                                            <img src={categ} alt="" className="img-fluid" />
                                                         </figure>
                                                         <div className="text">
                                                             <span className="text-uppercase">Collections</span>

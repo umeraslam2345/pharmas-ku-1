@@ -12,6 +12,8 @@ const CheckoutUserOrderData = (props) => {
     const [text , settext] = useState("")
     const [subject , setsubject] = useState("")
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
         if ( JSON.parse(localStorage.getItem("Admin")) ){
 
      const lasturl = props.match.url.split("/")[2]

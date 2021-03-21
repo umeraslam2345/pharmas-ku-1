@@ -590,8 +590,22 @@ app.get("/AllProduct", (req, res)=>{
     })
 })
 
+
 app.get("/AllCategories", (req, res)=>{
     ProductCatogories.find({})
+    .then((res2)=>{
+        res.send(res2)
+    })
+})
+
+
+app.post("/createCate", (req, res)=>{
+    const {Cate} = req.body
+
+    ProductCatogories1 =new ProductCatogories({
+        Categories : Cate
+    })
+    .save()
     .then((res2)=>{
         res.send(res2)
     })

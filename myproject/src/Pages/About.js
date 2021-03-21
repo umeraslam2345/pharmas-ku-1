@@ -8,6 +8,10 @@ import person3 from '../assets/images/person_3.jpg';
 import person4 from '../assets/images/person_4.jpg';
 
 class About extends Component {
+    componentDidMount(){
+        window.scrollTo(0, 0)
+
+    }
     render() {
         return (
             <div>

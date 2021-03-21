@@ -23,7 +23,8 @@ const Checkout = (props) => {
 
 
     useEffect(() =>{
-        
+        window.scrollTo(0, 0)
+
         var data =  JSON.parse(localStorage.getItem("Cart")) 
         if (data) {
             setCart(data)
@@ -161,6 +162,7 @@ const Checkout = (props) => {
                         localStorage.removeItem("SearchData")
                         localStorage.removeItem("Data")
                         localStorage.removeItem("CartPrice")
+                        localStorage.removeItem("CateProduct")
                         props.history.push(`/thankyou`)
 
                      }

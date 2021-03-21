@@ -8,7 +8,8 @@ const CheckoutUser = (props) => {
     const [checkout1 , setcheckout1] = useState([])
     const [checkout2 , setcheckout2] = useState([])
     useEffect(() =>{
-  
+      window.scrollTo(0, 0)
+
       if ( JSON.parse(localStorage.getItem("Admin")) ){
         fetch("/AllUserCheckoutData",{
             method: "GET",

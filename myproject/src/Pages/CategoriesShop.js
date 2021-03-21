@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import categ from '../assets/images/cate.jpeg';
 
 import women from '../assets/images/women.jpg';
 
@@ -368,7 +369,7 @@ const cate =(Categories) =>{
 
 
 
-                        <div className="container">
+                        {/* <div className="container">
                     <div className="row">
                             <div className="col-md-12">
                                 <div className="site-section site-blocks-2">
@@ -385,7 +386,7 @@ const cate =(Categories) =>{
                                                 <div className="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" style={{margin: "10px 0px"}} data-aos="fade" data-aos-delay="">
                                                     <Link className="block-2-item" to={"/shop/categories/"+Cat1} >
                                                         <figure className="image">
-                                                            <img src={women} alt="" className="img-fluid" />
+                                                            <img src={categ} alt="" className="img-fluid" />
                                                         </figure>
                                                         <div className="text">
                                                             <span className="text-uppercase">Collections</span>
@@ -404,7 +405,7 @@ const cate =(Categories) =>{
                             </div>
                         </div>
                     </div>
-
+ */}
 
 
 

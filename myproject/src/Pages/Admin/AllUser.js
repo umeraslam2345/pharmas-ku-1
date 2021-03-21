@@ -4,6 +4,8 @@ const AllUser =  (props)=> {
     const [ data  , setData] = useState([])
     
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
         if ( JSON.parse(localStorage.getItem("Admin")) ){
           fetch("/userall",{
              method: "GET",

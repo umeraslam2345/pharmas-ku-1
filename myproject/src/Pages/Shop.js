@@ -24,6 +24,8 @@ const Shop = (props) => {
     const [fal , setFal] = useState(false)
     const [fal1 , setFal1] = useState(false)
     useEffect(() =>{
+        window.scrollTo(0, 0)
+
         // const Inter = setInterval(()=>{
             //  if (!JSON.parse(localStorage.getItem("CateProduct")) ){
             //  var data1 = JSON.parse(localStorage.getItem("Cate")) 

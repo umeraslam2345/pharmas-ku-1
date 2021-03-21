@@ -3,7 +3,8 @@ import React ,{ useState, useEffect} from 'react'
 const AllProduct = () => {
     const [data , setdata] = useState([])
     useEffect(() =>{
-  
+      window.scrollTo(0, 0)
+
         fetch("/AllProduct",{
            method: "GET",
             headers :  {

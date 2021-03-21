@@ -10,6 +10,8 @@ const Admin = (props) => {
   const [product , setproduct] = useState([])
   const [checkout , setcheckout] = useState([])
   useEffect(() =>{
+    window.scrollTo(0, 0)
+
   if ( JSON.parse(localStorage.getItem("Admin")) ){
     
     fetch("/userall",{
