@@ -113,9 +113,9 @@ const Checkout = (props) => {
                                 user : JSON.parse(localStorage.getItem("User")) 
                             })
                         })
-                        .then(res=>res.json())
-                        .then((res1)=>{ 
-                            console.log(res1);
+                        .then(res10=>res10.json())
+                        .then((res11)=>{ 
+                            console.log(res11);
                         })
                         fetch("/user-cart-detail",{
                             method: "POST",

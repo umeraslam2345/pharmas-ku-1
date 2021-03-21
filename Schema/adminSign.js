@@ -5,7 +5,7 @@ const AdminLogin  = new mongoose.Schema({
     user : String , 
     cart :  [{type:Object}] ,
     Order  : [{type:Object}],
-    Detail  : [{type:Object}]
+    Details  : [{type:Object}]
 })
 module.exports = mongoose.model("Admin Sign" , AdminLogin)
 

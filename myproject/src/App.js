@@ -23,6 +23,9 @@ import CheckoutUserOrderData from './Pages/Admin/CheckoutUserOrderData';
 import LoginAdmin from './Pages/Admin/LoginAdmin';
 import forgetPass from './Pages/Admin/forgetPass';
 import Signup from './Pages/Admin/Signup';
+import AllUser from './Pages/Admin/AllUser';
+
+
 
 function App() {
   return (
@@ -40,6 +43,7 @@ function App() {
           <Route exact path='/forget-pass-admin' component={forgetPass} />
           <Route exact path='/createProduct' component={createProduct} />
           <Route exact path='/allproduct' component={AllProduct} />
+          <Route exact path='/alluser' component={AllUser} />
           <Route exact path='/allcheckoutuser' component={CheckoutUser} />
           <Route exact path='/allcheckoutuser/:id' component={CheckoutUserOrderData} />
           <Route exact path='/abc' component={demo} />

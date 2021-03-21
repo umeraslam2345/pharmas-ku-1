@@ -1,9 +1,9 @@
 import React ,{ useState, useEffect} from 'react'
 
-const AllProduct = (props) => {
+const AllProduct = () => {
     const [data , setdata] = useState([])
     useEffect(() =>{
-      if ( JSON.parse(localStorage.getItem("Admin")) ){
+  
         fetch("/AllProduct",{
            method: "GET",
             headers :  {
@@ -15,10 +15,6 @@ const AllProduct = (props) => {
         setdata(res2)
         console.log(res2)
        })
-      }
-      else{
-        props.history.push("/login")
-      }
      },[])
 
 

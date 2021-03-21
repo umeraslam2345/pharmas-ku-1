@@ -6,10 +6,23 @@ import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedI
 
 
 const Admin = (props) => {
+  const [userall , setuserall] = useState([])
   const [product , setproduct] = useState([])
   const [checkout , setcheckout] = useState([])
   useEffect(() =>{
   if ( JSON.parse(localStorage.getItem("Admin")) ){
+    
+    fetch("/userall",{
+      method: "GET",
+       headers :  {
+       "Content-Type" : "application/json" , 
+   } ,
+  })
+  .then(res13=>res13.json())
+  .then(res14=>{
+    setuserall(res14)
+  })
+
     fetch("/AllUserCheckoutData",{
       method: "GET",
        headers :  {
@@ -54,21 +67,21 @@ const Admin = (props) => {
 
 
 
-                  {/* <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
+                  <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">
                       <div class="card-body">
                         <div  style={{display :  "flex" , justifyContent : "space-between" , alignItems : "center"}}>
-                          <p class="card-title changeTitle">All User Visit your Website</p>
+                        <p class="card-title changeTitle">All User Data</p>
                           <Fab><GroupWorkIcon fontSize="large"/></Fab>
                         </div>
-                          <p class="card-text"  style={{paddingLeft : "15px"}}>5</p>
+                        <p class="card-text"  style={{paddingLeft : "15px"}}><Link to="/alluser">See More</Link></p>
                           <div style={{display :  "flex" , justifyContent : "flex-start" , alignItems : "center"}}>
                               <AssignmentTurnedInOutlinedIcon  style={{margin : "0px 15px 20px 0px" , fontSize :  "30" , color : "rgb(45, 206, 137)"}}/> 
-                              <p>5 Delivered</p>
+                              <p>{userall.length} Users</p>
                           </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
 
                   <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 admin-card">
                     <div class="card twoCards">

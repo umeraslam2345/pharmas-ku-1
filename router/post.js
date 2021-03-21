@@ -109,7 +109,14 @@ app.post("/signup-user-1" ,(req, res) => {
     // console.log(req.body);
     const { email , pass , user } = req.body;
     if(email , pass , user ){
-        const AdminLogin1 = new AdminLogin({
+        AdminLogin.findOne({email})
+        .then((res3)=>{
+            console.log(res3);
+            if(res3 != null){
+                res.send({Error : "Email Already Exists"})
+            }
+            else{ 
+                 const AdminLogin1 = new AdminLogin({
             email , 
             pass , 
             user 
@@ -117,12 +124,23 @@ app.post("/signup-user-1" ,(req, res) => {
             AdminLogin1.save().then((res2) =>{
                     res.send(res2)
             })
-// if (res2)
-            // res.send(res2)
-            // else
-            // res.send({ Error : "Password are Incorrect"})
+            }
+        })
+
 }
     else res.send({ Error : "Field Are Required"})
+})
+
+
+
+
+
+
+app.get("/userall" ,(req, res) => {
+        AdminLogin.find({})
+         .then((res2) =>{
+                    res.send(res2)
+            })
 })
 
 
@@ -256,7 +274,7 @@ app.post("/user-cart-add" ,(req, res) => {
 
 
 app.post("/user-cart-order" ,(req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const {  Order , user} = req.body;
     AdminLogin.findOne({_id : user._id})
     .then((res2)=>{
@@ -264,7 +282,7 @@ app.post("/user-cart-order" ,(req, res) => {
         var myquery = { Order: res2.Order };
         var newvalues = { $set: {Order} };
         AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
-            console.log(res1);
+            // console.log(res1);
             if (err)  res.json({message : " Error"});
             else res.json({message : " Successfully Save"})
         });
@@ -273,15 +291,15 @@ app.post("/user-cart-order" ,(req, res) => {
     })
 
 app.post("/user-cart-detail" ,(req, res) => {
-    console.log(req.body);
+    console.log(req.body.Details);
     const {  Details , user} = req.body;
     AdminLogin.findOne({_id : user._id})
     .then((res2)=>{
         console.log(res2)
-        var myquery = { Order: res2.Details };
+        var myquery = { Details: res2.Details };
         var newvalues = { $set: {Details} };
         AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
-            console.log(res1);
+            // console.log(res1);
             if (err)  res.json({message : " Error"});
             else res.json({message : " Successfully Save"})
         });
@@ -583,6 +601,14 @@ app.get("/AllCategories", (req, res)=>{
 
 app.delete("/deletePost/:post" ,(req,res)=>{
     AdmincreateProduct.findByIdAndDelete({_id:req.params.post})
+    .then((post)=>{
+         res.json(post)
+    })
+    
+})
+
+app.delete("/deleteUser/:post" ,(req,res)=>{
+    AdminLogin.findByIdAndDelete({_id:req.params.post})
     .then((post)=>{
          res.json(post)
     })

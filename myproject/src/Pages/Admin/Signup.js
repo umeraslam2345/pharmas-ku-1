@@ -54,6 +54,9 @@ const postData = (e) =>{
             // localStorage.setItem("User" , JSON.stringify("Yes") )
                 props.history.push("/login")
           }
+          else if (res2.Error){
+            swal(res2.Error )
+          }
           else{
             swal("Email & Password are Incorrect Plz Try Again !"  )
           }
