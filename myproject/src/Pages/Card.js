@@ -108,45 +108,6 @@ const Card = ()=> {
   }
 
   const EditCart = (id) =>{
-    // var data =  JSON.parse(localStorage.getItem("Cart")) 
-    //  var j = 0
-    // data.map((res,i)=>{
-    //     if (res._id === id)
-    //      j += res.Product_Price 
-    // })
-    var data1 = cart.filter((res,i)=>{
-        return res._id !== id
-    })
-    localStorage.setItem("Cart" ,JSON.stringify(data1))
-    fetch("/user-cart-add",{
-        method: "POST",
-        headers :  {
-            "Content-Type" : "application/json" , 
-        } ,
-        body : JSON.stringify({
-            cart : data1 ,
-            user : JSON.parse(localStorage.getItem("User")) 
-        })
-    })
-    .then(res=>res.json())
-    .then((res1)=>{ 
-        console.log(res1);
-    })
-        var j = 0
-    data1.map((res,i)=>{
-        // if (res._id === id)
-         j += res.Product_Price 
-    })
-    // let data5 =  JSON.parse(localStorage.getItem("CartPrice"))     
-    // total1 =  data5 - total1
-    if ( j !== 0){
-        localStorage.setItem("CartPrice",JSON.stringify( j))
-    }
-    else{
-        localStorage.setItem("CartPrice",JSON.stringify( 0))
-        settotal1(0)
-
-    }
     
     
   }
