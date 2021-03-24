@@ -236,14 +236,67 @@ else{
 
 
 
+
+
+
+
+app.post("/touchIn" ,(req, res) => {
+
+
+    const {name  ,lname  ,email  ,subject  ,Message  } = req.body
+
+
+    let transporter = nodemailer.createTransport({
+        service : "gmail" ,
+        auth : {
+            user : "projectpharma874@gmail.com" ,
+            pass : "projectpharma12345"
+        }
+    })
+    
+    
+    let mailOption = {
+        from : "projectpharma874@gmail.com",
+        to : "projectpharma874@gmail.com" ,
+        subject : name + " "+lname + " " + email,
+        text : Message
+    }
+    
+    transporter.sendMail(mailOption , function (err, data){
+        if (err) console.log(err);
+        else res.send({Ma})
+    })
+    
+    
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.post("/logIn-new-pass" ,(req, res) => {
     console.log(req.body);
-    const {  pass ,email} = req.body;
+    const { email} = req.body;
     AdminLogin.findOne({email})
     .then((res2)=>{
-        console.log(res2)
+        console.log(res2,"res2")
         var myquery = { pass: res2.pass };
-        var newvalues = { $set: {pass} };
+        var newvalues = { $set: {pass : req.body.pass} };
         AdminLogin.updateOne(myquery, newvalues, function(err, res1) {
             console.log(res1);
             if (err)  res.json({message : " Error"});

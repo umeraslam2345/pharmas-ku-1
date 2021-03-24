@@ -7,7 +7,7 @@ class Footer extends Component {
             <footer className="site-footer border-top">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6 mb-5 mb-lg-0">
+                        <div className="col-lg-8 mb-8 mb-lg-0">
                             <div className="row">
                                 <div className="col-md-12">
                                     <h3 className="footer-heading mb-4">Navigations</h3>
@@ -36,14 +36,14 @@ class Footer extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6 col-lg-3 mb-4 mb-lg-0">
+                        {/* <div className="col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <h3 className="footer-heading mb-4">Promo</h3>
                             <a href="#" className="block-6">
                                 <img src={promoImg} alt="Image placeholder" className="img-fluid rounded mb-4" />
                                 <h3 className="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
                                 <p>Promo from  nuary 15 &mdash; 25, 2019</p>
                             </a>
-                        </div>
+                        </div> */}
                         <div className="col-md-6 col-lg-3">
                             <div className="block-5 mb-5">
                                 <h3 className="footer-heading mb-4">Contact Info</h3>
@@ -55,7 +55,7 @@ class Footer extends Component {
                             </div>
 
                             <div className="block-7">
-                                <form action="#" method="post">
+                                <form>
                                     <label htmlFor="email_subscribe" className="footer-heading">Subscribe</label>
                                     <div className="form-group">
                                         <input type="text" className="form-control py-4" id="email_subscribe" placeholder="Email" />
