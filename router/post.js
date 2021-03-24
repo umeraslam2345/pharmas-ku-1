@@ -264,7 +264,7 @@ app.post("/touchIn" ,(req, res) => {
     
     transporter.sendMail(mailOption , function (err, data){
         if (err) console.log(err);
-        else res.send({Ma})
+        else res.send(data)
     })
     
     
