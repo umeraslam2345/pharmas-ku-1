@@ -29,8 +29,13 @@ const Contact = (props)=>  {
           .then((res)=>res.json())
           .then((res2)  =>{
               console.log(res2)
-              if (res2 !== null && !res2.Error  ){
-                swal("SucessFully Create An Account"  )
+              if (res2){
+                swal("SucessFully Send "  )
+                setname ("") 
+                setlname("") 
+                    setemail("") 
+                    setsubject("") 
+                    setMessage("") 
                 // localStorage.setItem("User" , JSON.stringify("Yes") )
                     // props.history.push("/login")
               }
@@ -38,7 +43,7 @@ const Contact = (props)=>  {
                 swal(res2.Error )
               }
               else{
-                swal("Email & Password are Incorrect Plz Try Again !"  )
+                swal("Plz Try Again !"  )
               }
             // console.log(res2)
           })
